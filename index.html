@@ -181,7 +181,9 @@ function renderCart(){
   const totalBox = document.getElementById("totalDisplay");
 
   if(cart.length === 0){
-    box.innerHTML = `<p class="italic text-gray-400">Giỏ hàng đang trống...</p>`;
+    box.innerHTML = `<p class="italic text-gray-400 text-center">
+      Giỏ hàng đang trống...
+    </p>`;
     totalBox.innerText = "0 ₫";
     return;
   }
@@ -189,25 +191,49 @@ function renderCart(){
   let total = 0;
 
   box.innerHTML = cart.map(i => {
-    total += i.price * i.qty;
+    const weightKg = i.qty * UNIT_KG;      // khối lượng theo size
+    const itemTotal = i.price * i.qty;    // thành tiền
+    total += itemTotal;
+
     return `
-    <div class="flex justify-between items-center bg-gray-50 p-4 rounded-xl border">
-      <div>
-        <b>${i.name}</b>
-        <p class="text-sm text-gray-400">${i.price.toLocaleString()} ₫</p>
+    <div class="bg-gray-50 p-4 rounded-xl border space-y-2">
+
+      <!-- TÊN + SIZE -->
+      <div class="flex justify-between items-start">
+        <div>
+          <b class="block">${i.name}</b>
+          <p class="text-sm text-gray-500">
+            ${i.qty} gói × ${UNIT_KG}kg = 
+            <span class="font-semibold text-gray-700">${weightKg}kg</span>
+          </p>
+        </div>
+        <span class="font-bold text-orange-600">
+          ${itemTotal.toLocaleString()} ₫
+        </span>
       </div>
 
-      <div class="flex items-center gap-3">
-        <div class="flex items-center border rounded-lg overflow-hidden">
-          <button onclick="changeQty('${i.name}', -1)"
-            class="px-3 py-1 font-bold hover:bg-gray-200">−</button>
-          <span class="px-3 font-bold">${i.qty}</span>
-          <button onclick="changeQty('${i.name}', 1)"
-            class="px-3 py-1 font-bold hover:bg-gray-200">+</button>
+      <!-- ĐIỀU CHỈNH SỐ LƯỢNG -->
+      <div class="flex justify-between items-center">
+        <p class="text-xs text-gray-400">
+          Đơn giá: ${i.price.toLocaleString()} ₫ / gói
+        </p>
+
+        <div class="flex items-center gap-3">
+          <div class="flex items-center border rounded-lg overflow-hidden">
+            <button onclick="changeQty('${i.name}', -1)"
+              class="px-3 py-1 font-bold hover:bg-gray-200">−</button>
+            <span class="px-3 font-bold">${i.qty}</span>
+            <button onclick="changeQty('${i.name}', 1)"
+              class="px-3 py-1 font-bold hover:bg-gray-200">+</button>
+          </div>
+
+          <button onclick="removeItem('${i.name}')"
+            class="text-red-500 text-xs font-bold hover:underline">
+            Xóa
+          </button>
         </div>
-        <button onclick="removeItem('${i.name}')"
-          class="text-red-500 text-xs font-bold hover:underline">Xóa</button>
       </div>
+
     </div>
     `;
   }).join("");
@@ -248,6 +274,7 @@ function sendOrder(){
 
 </body>
 </html>
+
 
 
 
