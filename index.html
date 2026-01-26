@@ -196,9 +196,9 @@ function renderCart(){
     return `
     <div class="flex justify-between items-center bg-gray-50 p-4 rounded-xl border">
       <div>
-        <b>${i.name} ${i.qty} (${weightKg}kg)</b>
+        <b>${i.name} (${weightKg}kg)</b>
         <p class="text-sm text-gray-400">
-          ${i.price.toLocaleString()} ₫ / sản phẩm
+          ${i.price.toLocaleString()} ₫ / gói (0.5kg)
         </p>
       </div>
 
@@ -253,6 +253,7 @@ function sendOrder(){
 
 </body>
 </html>
+
 
 
 
