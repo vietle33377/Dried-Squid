@@ -18,7 +18,7 @@ html { scroll-behavior: smooth; }
 
 <!-- HEADER -->
 <header class="fixed top-0 w-full bg-white/90 backdrop-blur shadow z-50">
-  <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+  <div class="max-w-7xl mx-auto px-4 py-2 flex justify-between items-center">
     <div class="flex items-center gap-2">
       <img src="images/logo.png" class="w-24 h-24 object-contain" alt="Logo">
       <b class="text-xl uppercase tracking-tighter">Dried Squid</b>
@@ -227,7 +227,10 @@ function sendOrder(){
     phone: phone.value,
     address: address.value,
     note: note.value,
-    products: cart.map(i=>`${i.name} x${i.qty}`).join(", "),
+    products: cart.map(i => {
+  const kg = i.qty * 0.5;
+  return `- ${i.name} x${i.qty} (${kg}kg)`;
+}).join("\n"),
     total: totalDisplay.innerText
   });
 
@@ -240,6 +243,7 @@ function sendOrder(){
 
 </body>
 </html>
+
 
 
 
