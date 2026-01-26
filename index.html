@@ -216,21 +216,27 @@ function renderCart(){
 }
 
 /* ====== GỬI ĐƠN HÀNG ====== */
+<script>
 function sendOrder(){
   if(cart.length === 0){
     alert("Vui lòng chọn ít nhất một sản phẩm");
     return;
   }
 
+  const customerName = document.getElementById("name").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const address = document.getElementById("address").value.trim();
+  const note = document.getElementById("note").value.trim();
+
   emailjs.send("service_p63b3wa","template_oxug9rs",{
-    name: name.value,
-    phone: phone.value,
-    address: address.value,
-    note: note.value,
+    name: customerName,
+    phone: phone,
+    address: address,
+    note: note,
     products: cart.map(i => {
-  const kg = i.qty * 0.5;
-  return `- ${i.name} x${i.qty} (${kg}kg)`;
-}).join("\n"),
+      const kg = i.qty * 0.5;
+      return `- ${i.name} x${i.qty} (${kg}kg)`;
+    }).join("\n"),
     total: totalDisplay.innerText
   });
 
@@ -243,6 +249,7 @@ function sendOrder(){
 
 </body>
 </html>
+
 
 
 
