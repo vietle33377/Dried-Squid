@@ -34,7 +34,7 @@ html { scroll-behavior: smooth; }
 <!-- HERO -->
 <section class="max-w-7xl mx-auto px-4 py-14 grid md:grid-cols-2 gap-10 items-center"> 
 <div> 
-<h1 class="text-5xl font-extrabold"> Dried Squid<br>
+<h1 class="text-4xl font-extrabold"> Dried Squid<br>
 <span class="text-gray-500">The Gift Of Nature</span>
     </h1>
 
@@ -134,7 +134,7 @@ let cart = [];
 document.getElementById("productList").innerHTML =
 products.map(p => `
 <div class="bg-white p-5 rounded-2xl shadow hover:shadow-lg transition group">
-  <div class="overflow-hidden rounded-xl h-56 mb-4">
+  <div class="overflow-hidden rounded-xl h-64 mb-4">
     <img src="${p.image}"
          class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
   </div>
@@ -240,3 +240,4 @@ function sendOrder(){
 
 </body>
 </html>
+
