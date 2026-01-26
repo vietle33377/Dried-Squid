@@ -21,9 +21,9 @@ html { scroll-behavior: smooth; }
   <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
     <div class="flex items-center gap-2">
       <img src="images/logo.png" class="w-24 h-24 object-contain" alt="Logo">
-      <b class="text-x2 uppercase tracking-tight">Dried Squid</b>
+      <b class="text-xl uppercase tracking-tighter">Dried Squid</b>
     </div>
-    <nav class="hidden md:flex gap-6 text-xs font-bold uppercase">
+    <nav class="hidden md:flex gap-12 text-xs font-bold uppercase">
       <a href="#products">Sản phẩm</a>
       <a href="#order">Đặt hàng</a>
     </nav>
@@ -32,18 +32,26 @@ html { scroll-behavior: smooth; }
 <div class="h-20"></div>
 
 <!-- HERO -->
-<section class="max-w-7xl mx-auto px-4 py-14 grid md:grid-cols-2 gap-10 items-center">
-  <div>
-    <h1 class="text-5xl font-extrabold">
-      Dried Squid<br><span class="text-gray-500">The Gift Of Nature</span>
+<section class="max-w-7xl mx-auto px-4 py-14 grid md:grid-cols-2 gap-10 items-center"> 
+<div> 
+<h1 class="text-5xl font-extrabold"> Dried Squid<br>
+<span class="text-gray-500">The Gift Of Nature</span>
     </h1>
-    <p class="mt-4 text-gray-600">
-      Khô mực câu tự nhiên Núi Thành – Quảng Nam<br>
-      Đóng gói cao cấp – Quà biếu sang trọng
+
+    <p class="mt-6 text-xl font-semibold text-gray-800">
+      Tinh hoa biển cả – Chuẩn mực quà biếu cao cấp
     </p>
-    <a href="#products" class="inline-block mt-6 px-10 py-4 bg-black text-white rounded-full">
-      Đặt hàng ngay
-    </a>
+
+    <p class="mt-4 text-gray-600 text-lg leading-relaxed">
+      Khô mực câu tự nhiên Tam Tiến – Núi Thành – Quảng Nam<br>
+      Đóng gói cao cấp - Vị ngọt tự nhiên - Phù hợp biếu tặng & sử dụng gia đình
+    </p>
+
+<a href="#products"
+   class="inline-block mt-8 px-10 py-4 bg-black text-white rounded-full font-bold tracking-wide hover:bg-gray-800 transition">
+   Đặt hàng ngay
+</a>
+
   </div>
 <!-- <img src="images/hero.jpg"
      class="custom-rounded shadow-2xl w-full h-[520px] md:h-[650px] object-cover"
@@ -74,7 +82,10 @@ html { scroll-behavior: smooth; }
   <div class="max-w-6xl mx-auto px-4 grid lg:grid-cols-2 gap-16">
 
     <div>
-      <h2 class="text-2xl font-bold mb-6">🛒 Giỏ hàng</h2>
+      <h2 class="text-2xl font-bold mb-6">🛒 Giỏ hàng của bạn</h2>
+	                  <div id="cartContent" class="space-y-4 mb-8">
+                    <p class="text-gray-400 italic text-center py-10">Giỏ hàng đang trống...</p>
+                </div>
       <div id="cartContent" class="space-y-4"></div>
       <p class="mt-6 text-xl font-bold">Tổng: <span id="totalDisplay">0 ₫</span></p>
     </div>
@@ -86,8 +97,9 @@ html { scroll-behavior: smooth; }
         <input id="phone" required placeholder="Số điện thoại" class="w-full p-4 border rounded-xl">
         <input id="address" required placeholder="Địa chỉ" class="w-full p-4 border rounded-xl">
         <textarea id="note" placeholder="Ghi chú" class="w-full p-4 border rounded-xl"></textarea>
-        <button class="w-full bg-orange-600 text-white py-4 rounded-xl font-bold">
-          XÁC NHẬN ĐẶT HÀNG
+        <button     class="mt-3 w-full bg-black text-white py-2 rounded-xl
+           hover:bg-orange-600 transition font-bold">
+    XÁC NHẬN ĐẶT HÀNG
         </button>
       </form>
     </div>
@@ -103,7 +115,8 @@ html { scroll-behavior: smooth; }
 
 <script>
 emailjs.init("H_ObSOGwG001ViYfp");
-
+const ZALO_PHONE = "0334561945";
+/* ====== SẢN PHẨM ====== */
 const products = [
   {name:"Size SS", price:862500, image:"images/ss.jpg"},
   {name:"Size SA", price:850000, image:"images/sa.jpg"},
@@ -117,54 +130,113 @@ const products = [
 
 let cart = [];
 
+/* ====== RENDER SẢN PHẨM ====== */
 document.getElementById("productList").innerHTML =
-products.map(p=>`
-<div class="bg-white p-5 rounded-2xl shadow">
-  <img src="${p.image}" class="h-40 w-full object-cover rounded-xl mb-3">
-  <b>${p.name}</b>
+products.map(p => `
+<div class="bg-white p-5 rounded-2xl shadow hover:shadow-lg transition group">
+  <div class="overflow-hidden rounded-xl h-56 mb-4">
+    <img src="${p.image}"
+         class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+  </div>
+  <b class="block mb-1">${p.name}</b>
   <p class="text-orange-600 font-bold">${p.price.toLocaleString()} ₫</p>
-  <button onclick="add('${p.name}',${p.price})"
-    class="mt-3 w-full bg-black text-white py-2 rounded-xl">
-    Thêm vào giỏ
+
+  <!-- BƯỚC 1: HOVER ĐỔI MÀU -->
+  <button onclick="addToCart('${p.name}', ${p.price})"
+    class="mt-3 w-full bg-black text-white py-2 rounded-xl
+           hover:bg-orange-600 transition font-bold">
+    Thêm vào giỏ hàng
   </button>
 </div>
 `).join("");
 
-function add(name,price){
-  const i = cart.find(x=>x.name===name);
-  i ? i.qty++ : cart.push({name,price,qty:1});
-  render();
+/* ====== BƯỚC 2: THÊM VÀO GIỎ ====== */
+function addToCart(name, price){
+  const item = cart.find(i => i.name === name);
+  if(item){
+    item.qty++;          // đã tồn tại → tăng số lượng
+  } else {
+    cart.push({name, price, qty: 1}); // chưa có → thêm mới
+  }
+  renderCart();
 }
 
-function render(){
-  const box=document.getElementById("cartContent");
-  if(!cart.length){ box.innerHTML="Giỏ hàng trống"; return;}
-  let total=0;
-  box.innerHTML=cart.map(i=>{
-    total+=i.price*i.qty;
-    return `<p>${i.name} x${i.qty}</p>`;
+/* ====== BƯỚC 3: QUẢN LÝ GIỎ ====== */
+function changeQty(name, delta){
+  const item = cart.find(i => i.name === name);
+  if(!item) return;
+  item.qty += delta;
+  if(item.qty <= 0) removeItem(name);
+  renderCart();
+}
+
+function removeItem(name){
+  cart = cart.filter(i => i.name !== name);
+  renderCart();
+}
+
+/* ====== RENDER GIỎ HÀNG + TÍNH TỔNG REALTIME ====== */
+function renderCart(){
+  const box = document.getElementById("cartContent");
+  const totalBox = document.getElementById("totalDisplay");
+
+  if(cart.length === 0){
+    box.innerHTML = `<p class="italic text-gray-400">Giỏ hàng đang trống...</p>`;
+    totalBox.innerText = "0 ₫";
+    return;
+  }
+
+  let total = 0;
+
+  box.innerHTML = cart.map(i => {
+    total += i.price * i.qty;
+    return `
+    <div class="flex justify-between items-center bg-gray-50 p-4 rounded-xl border">
+      <div>
+        <b>${i.name}</b>
+        <p class="text-sm text-gray-400">${i.price.toLocaleString()} ₫</p>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <div class="flex items-center border rounded-lg overflow-hidden">
+          <button onclick="changeQty('${i.name}', -1)"
+            class="px-3 py-1 font-bold hover:bg-gray-200">−</button>
+          <span class="px-3 font-bold">${i.qty}</span>
+          <button onclick="changeQty('${i.name}', 1)"
+            class="px-3 py-1 font-bold hover:bg-gray-200">+</button>
+        </div>
+        <button onclick="removeItem('${i.name}')"
+          class="text-red-500 text-xs font-bold hover:underline">Xóa</button>
+      </div>
+    </div>
+    `;
   }).join("");
-  totalDisplay.innerText=total.toLocaleString()+" ₫";
+
+  totalBox.innerText = total.toLocaleString() + " ₫";
 }
 
+/* ====== GỬI ĐƠN HÀNG ====== */
 function sendOrder(){
-  if(!cart.length) return alert("Chưa chọn sản phẩm");
+  if(cart.length === 0){
+    alert("Vui lòng chọn ít nhất một sản phẩm");
+    return;
+  }
+
   emailjs.send("service_p63b3wa","template_oxug9rs",{
-    name, phone, address, note,
+    name: name.value,
+    phone: phone.value,
+    address: address.value,
+    note: note.value,
     products: cart.map(i=>`${i.name} x${i.qty}`).join(", "),
     total: totalDisplay.innerText
   });
-  alert("Đặt hàng thành công!");
-  cart=[]; render();
+
+  alert("Đặt hàng thành công! Chúng tôi sẽ liên hệ sớm.");
+  cart = [];
+  renderCart();
+  document.querySelector("form").reset();
 }
 </script>
 
 </body>
 </html>
-
-
-
-
-
-
-
