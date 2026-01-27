@@ -119,9 +119,26 @@ html { scroll-behavior: smooth; }
 </section>
 
 <!-- FLOAT CONTACT -->
-<div class="fixed bottom-6 right-6 flex flex-col gap-3">
-  <a href="https://zalo.me/0334561945" class="bg-blue-600 text-white px-4 py-2 rounded-full">Ⓩ Zalo</a>
-  <a href="https://facebook.com/DriedSquidVN" class="bg-blue-800 text-white px-4 py-2 rounded-full">ⓕ Facebook</a>
+<div class="fixed bottom-6 right-6 flex flex-col gap-3 z-50">
+
+  <!-- ZALO -->
+  <a href="https://zalo.me/0334561945"
+     target="_blank"
+     class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg"
+         alt="Zalo"
+         class="w-7 h-7">
+  </a>
+
+  <!-- FACEBOOK -->
+  <a href="https://facebook.com/DriedSquidVN"
+     target="_blank"
+     class="w-12 h-12 bg-blue-800 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+         fill="white" class="w-6 h-6">
+      <path d="M22.675 0h-21.35C.597 0 0 .597 0 1.326v21.348C0 23.403.597 24 1.326 24h11.495v-9.294H9.691v-3.622h3.13V8.413c0-3.1 1.894-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24h-1.918c-1.504 0-1.796.715-1.796 1.763v2.31h3.587l-.467 3.622h-3.12V24h6.116C23.403 24 24 23.403 24 22.674V1.326C24 .597 23.403 0 22.675 0z"/>
+    </svg>
+  </a>
 </div>
 
 <script>
@@ -264,3 +281,4 @@ function sendOrder(){
 </script>
 </body>
 </html>
+
