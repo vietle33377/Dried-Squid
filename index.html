@@ -72,7 +72,18 @@ html { scroll-behavior: smooth; }
 <!-- PRODUCTS -->
 <section id="products" class="bg-gray-50 py-20">
   <div class="max-w-7xl mx-auto px-4">
-    <h2 class="text-3xl font-bold text-center mb-10 uppercase">Danh mục sản phẩm</h2>
+<h2 class="text-3xl font-bold text-center mb-6 uppercase">
+  Danh mục sản phẩm
+</h2>
+
+<!-- THÔNG TIN TIÊU CHUẨN -->
+<div class="max-w-3xl mx-auto mb-5 bg-white border rounded-lg px-4 py-2 text-sm text-gray-700">
+  <p class="font-semibold mb-2">Thông tin tiêu chuẩn sản phẩm:</p>
+  <ul class="list-disc list-inside space-y-1">
+    <li>1 gói = <b>0.5kg</b></li>
+    <li>Quy cách đóng gói: <b>35 × 25 × 5 cm</b></li>
+  </ul>
+</div>
     <div id="productList" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8"></div>
   </div>
 </section>
@@ -109,8 +120,8 @@ html { scroll-behavior: smooth; }
 
 <!-- FLOAT CONTACT -->
 <div class="fixed bottom-6 right-6 flex flex-col gap-3">
-  <a href="https://zalo.me/0334561945" class="bg-blue-600 text-white px-4 py-2 rounded-full">Zalo</a>
-  <a href="https://facebook.com/DriedSquidVN" class="bg-blue-800 text-white px-4 py-2 rounded-full">Facebook</a>
+  <a href="https://zalo.me/0334561945" class="bg-blue-600 text-white px-4 py-2 rounded-full">Ⓩ Zalo</a>
+  <a href="https://facebook.com/DriedSquidVN" class="bg-blue-800 text-white px-4 py-2 rounded-full">ⓕ Facebook</a>
 </div>
 
 <script>
@@ -118,14 +129,14 @@ emailjs.init("H_ObSOGwG001ViYfp");
 const ZALO_PHONE = "0334561945";
 /* ====== SẢN PHẨM ====== */
 const products = [
-  {name:"Size SS", price:862500, image:"images/ss.jpg"},
-  {name:"Size SA", price:850000, image:"images/sa.jpg"},
-  {name:"Size A1", price:800000, image:"images/a1.jpg"},
-  {name:"Size A2", price:762500, image:"images/a2.jpg"},
-  {name:"Size A3", price:650000, image:"images/a3.jpg"},
-  {name:"Size A4", price:481250, image:"images/a4.jpg"},
-  {name:"Size A5", price:362000, image:"images/a5.jpg"},
-  {name:"Mực 1 nắng", price:520000, image:"images/1nang.jpg"}
+  {name:"Size SS", price:862500, image:"images/ss.jpg", note:"3–4 con / 0.5kg"},
+  {name:"Size SA", price:850000, image:"images/sa.jpg", note:"5–6 con / 0.5kg"},
+  {name:"Size A1", price:800000, image:"images/a1.jpg", note:"7–8 con / 0.5kg"},
+  {name:"Size A2", price:762500, image:"images/a2.jpg", note:"15–20 con / 0.5kg"},
+  {name:"Size A3", price:650000, image:"images/a3.jpg", note:"20–25 con / 0.5kg"},
+  {name:"Size A4", price:481250, image:"images/a4.jpg", note:"25–30 con / 0.5kg"},
+  {name:"Size A5", price:362000, image:"images/a5.jpg", note:"30–40 con / 0.5kg"},
+  {name:"Mực 1 nắng", price:520000, image:"images/1nang.jpg", note:"2–4 con / 0.5kg"}
 ];
 
 let cart = [];
@@ -138,8 +149,9 @@ products.map(p => `
     <img src="${p.image}"
          class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
   </div>
-  <b class="block mb-1">${p.name}</b>
-  <p class="text-orange-600 font-bold">${p.price.toLocaleString()} ₫</p>
+<b class="block mb-1">${p.name}</b>
+<p class="text-sm text-gray-500 mb-1">${p.note}</p>
+<p class="text-orange-600 font-bold">${p.price.toLocaleString()} ₫</p>
 
   <!-- BƯỚC 1: HOVER ĐỔI MÀU -->
   <button onclick="addToCart('${p.name}', ${p.price})"
@@ -250,17 +262,5 @@ function sendOrder(){
   document.querySelector("form").reset();
 }
 </script>
-
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
