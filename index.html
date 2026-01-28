@@ -18,9 +18,9 @@ html { scroll-behavior: smooth; }
 
 <!-- HEADER -->
 <header class="fixed top-0 w-full bg-white/90 backdrop-blur shadow z-50">
-  <div class="max-w-7xl mx-auto px-4 py-2 flex justify-between items-center">
+<div class="max-w-7xl mx-auto px-4 py-1 flex justify-between items-center">
     <div class="flex items-center gap-2">
-      <img src="images/logo.png" class="w-24 h-24 object-contain" alt="Logo">
+      <img src="images/logo.png" class="w-16 h-16 object-contain" alt="Logo">
       <b class="text-xl uppercase tracking-tighter">Dried Squid</b>
     </div>
     <nav class="hidden md:flex gap-12 text-xs font-bold uppercase">
@@ -38,29 +38,33 @@ html { scroll-behavior: smooth; }
 <span class="text-gray-500">The Gift Of Nature</span>
     </h1>
 
-    <p class="mt-6 text-xl font-semibold text-gray-800">
+    <p class="mt-3 text-lg italic text-gray-600">
+      “Không chỉ là khô mực – mà là một món quà từ biển.”
+    </p>
+
+    <p class="mt-5 text-xl font-semibold text-gray-800">
       Tinh hoa biển cả – Chuẩn mực quà biếu tặng cao cấp
     </p>
 
-    <p class="mt-4 text-gray-600 text-lg leading-relaxed">
-      Khô mực câu tự nhiên Tam Tiến – Núi Thành – Quảng Nam<br>
-      Đóng gói cao cấp - Vị ngọt tự nhiên - Phù hợp biếu tặng & sử dụng gia đình
+    <p class="mt-3 text-gray-600 leading-relaxed max-w-xl">
+      Khô mực câu tự nhiên được chọn lọc từ vùng biển Tam Tiến – Quảng Nam,
+      chế biến thủ công theo phương pháp truyền thống, giữ trọn
+      vị ngọt thanh của biển cả.
     </p>
 
-<a href="#products"
-   class="inline-block mt-8 px-10 py-4 bg-black text-white rounded-full font-bold tracking-wide hover:bg-gray-800 transition">
-   Đặt hàng ngay
-</a>
+    <ul class="mt-4 space-y-2 text-gray-700">
+      <li>✔ Phơi nắng tự nhiên – thịt dày, dai mềm, vị ngọt thanh đặc trưng</li>
+      <li>✔ Không tẩm ướp – không phụ gia – không hóa chất</li>
+      <li>✔ Đóng gói sang trọng, hút chân không – xứng đáng làm quà biếu</li>
+      <li>✔ Cam kết chất lượng – hoàn tiền nếu không đúng mô tả</li>
+    </ul>
 
+<a href="#products"
+   class="inline-block mt-8 px-8 py-3 bg-black text-white rounded-full font-semibold tracking-wide hover:bg-orange-600 transition">
+   Đặt hàng ngay – Giao tận nơi
+</a>
   </div>
-<!-- <img src="images/hero.jpg"
-     class="custom-rounded shadow-2xl w-full h-[520px] md:h-[650px] object-cover"
-     alt="Khô mực"> -->
-<!-- <div class="h-[80vh] flex items-center justify-center bg-black">
-  <img src="images/hero.jpg"
-       class="h-full w-auto object-contain"
-       alt="Khô mực">
-</div> -->
+<!-- Hình ảnh Hero -->
   <div class="h-[85vh] w-full overflow-hidden">
   <img src="images/hero.jpg"
        class="w-full h-full object-cover"
@@ -68,25 +72,139 @@ html { scroll-behavior: smooth; }
 </div>
 
 </section>
+<!-- Story câu chuyện -->
+<section class="max-w-5xl mx-auto px-4 py-16 text-center">
+  <p class="text-sm uppercase tracking-widest text-gray-400 mb-4">
+    Câu chuyện từ biển
+  </p>
 
-<!-- PRODUCTS -->
-<section id="products" class="bg-gray-50 py-20">
-  <div class="max-w-7xl mx-auto px-4">
-<h2 class="text-3xl font-bold text-center mb-6 uppercase">
-  Danh mục sản phẩm
-</h2>
+  <h3 class="text-2xl font-semibold mb-4">
+    Mỗi con mực là một lựa chọn
+  </h3>
 
-<!-- THÔNG TIN TIÊU CHUẨN -->
-<div class="max-w-3xl mx-auto mb-5 bg-white border rounded-lg px-4 py-2 text-sm text-gray-700">
-  <p class="font-semibold mb-2">Thông tin tiêu chuẩn sản phẩm:</p>
-  <ul class="list-disc list-inside space-y-1">
-    <li>1 gói = <b>0.5kg</b></li>
-    <li>Quy cách đóng gói: <b>35 × 25 × 5 cm</b></li>
-  </ul>
-</div>
-    <div id="productList" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8"></div>
+  <p class="text-gray-600 leading-relaxed max-w-3xl mx-auto">
+    Dried Squid được tuyển chọn từ mực câu tự nhiên vùng biển Tam Tiến – Quảng Nam,
+    đánh bắt theo mùa, phơi nắng tự nhiên và đóng gói cẩn trọng từng gói.
+    <br><br>
+    Chúng tôi tin rằng, một món quà xứng đáng không cần phô trương –
+    chỉ cần đủ chân thành, đủ nguyên bản và đủ tinh tế.
+  </p>
+</section>
+
+<!-- COMBO QUÀ BIẾU -->
+<section class="bg-white py-16">
+  <div class="max-w-6xl mx-auto px-4">
+
+    <h3 class="text-2xl font-bold text-center mb-10">
+      Gợi ý quà biếu được ưa chuộng
+    </h3>
+
+    <div class="grid md:grid-cols-2 gap-8">
+
+      <!-- COMBO 1 Combo Tinh Hoa (1kg) = SS-->
+      <div class="border rounded-2xl p-6 text-center bg-gray-50">
+        <span class="text-sm uppercase tracking-widest text-gray-400">
+          Được chọn nhiều nhất
+        </span>
+
+        <h4 class="mt-3 text-xl font-semibold">
+          🎁 Combo Tinh Hoa (1kg)
+        </h4>
+
+        <ul class="mt-4 space-y-1 text-gray-600 text-sm">
+          <li>• 2 gói mực câu chọn lọc size đẹp, đồng đều</li>
+          <li>• Hộp + túi quà cao cấp</li>
+          <li>• Phù hợp biếu gia đình, người thân</li>
+        </ul>
+
+<button
+  onclick="addCombo('Combo Tinh Hoa (1kg)', 1, PRICE_SS * 2)"
+  class="mt-6 px-8 py-3 bg-black text-white rounded-full font-semibold hover:bg-orange-600 transition">
+  Chọn combo này
+</button>
+
+      </div>
+
+      <!-- COMBO 2 Combo Trân Quý (2kg) = SA-->
+      <div class="border rounded-2xl p-6 text-center bg-gray-50">
+        <span class="text-sm uppercase tracking-widest text-gray-400">
+          Phù hợp biếu đối tác
+        </span>
+
+        <h4 class="mt-3 text-xl font-semibold">
+          🎁 Combo Trân Quý (2kg)
+        </h4>
+
+        <ul class="mt-4 space-y-1 text-gray-600 text-sm">
+          <li>• Tuyển chọn size mực đẹp (ưu tiên biếu)</li>
+          <li>• Đóng hộp sang trọng – chỉnh chu</li>
+          <li>• Miễn phí giao nhanh</li>
+        </ul>
+
+<button
+onclick="addCombo('Combo Trân Quý (2kg)', 2, PRICE_SA * 2)"
+  class="mt-6 px-8 py-3 bg-black text-white rounded-full font-semibold hover:bg-orange-600 transition">
+  Phù hợp biếu đối tác
+</button>
+
+      </div>
+
+    </div>
   </div>
 </section>
+
+<!-- PRODUCTS -->
+<section id="products" class="bg-gray-50 py-18">
+  <div class="max-w-7xl mx-auto px-4">
+
+    <!-- TITLE -->
+    <div class="text-center mb-8">
+      <h2 class="text-3xl font-bold uppercase tracking-wide">
+        Danh mục sản phẩm
+      </h2>
+      <p class="mt-2 text-gray-500 text-sm">
+        Tuyển chọn khô mực câu – xứng đáng cho biếu tặng & thưởng thức
+      </p>
+    </div>
+
+    <!-- INFO + TRUST -->
+    <div class="max-w-5xl mx-auto mb-10 grid md:grid-cols-2 gap-6">
+
+      <!-- STANDARD INFO -->
+      <div class="bg-white rounded-2xl px-6 py-3 border">
+        <p class="text-sm font-semibold text-gray-800 mb-3">
+          Tiêu chuẩn đóng gói
+        </p>
+        <ul class="text-sm text-gray-600 space-y-1">
+          <li>• Trọng lượng: <b>0.5kg / gói</b></li>
+          <li>• Kích thước hộp: <b>35 × 25 × 5 cm</b></li>
+        </ul>
+      </div>
+
+      <!-- TRUST -->
+      <div class="grid grid-cols-3 gap-4 text-center text-sm text-gray-700">
+        <div class="bg-white rounded-2xl py-2 border">
+          <span class="block text-lg mb-1">⭐</span>
+          2.000+ khách tin chọn
+        </div>
+        <div class="bg-white rounded-2xl py-2 border">
+          <span class="block text-lg mb-1">🚚</span>
+          Giao nhanh 24–48h
+        </div>
+        <div class="bg-white rounded-2xl py-2 border">
+          <span class="block text-lg mb-1">🎁</span>
+          Miễn phí túi & hộp quà<br>với đơn từ 1kg
+        </div>
+      </div>
+
+    </div>
+
+    <!-- PRODUCT LIST -->
+    <div id="productList" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8"></div>
+
+  </div>
+</section>
+
 
 <!-- ORDER -->
 <section id="order" class="py-24 bg-white">
@@ -112,6 +230,8 @@ html { scroll-behavior: smooth; }
            hover:bg-orange-600 transition font-bold">
     XÁC NHẬN ĐẶT HÀNG
         </button>
+		        <p class="text-sm text-gray-500 text-center">
+          👉 Nhấn chat Zalo để xác nhận & giao hàng nhanh hơn
       </form>
     </div>
 
@@ -155,7 +275,8 @@ const products = [
   {name:"Size A5", price:362000, image:"images/a5.jpg", note:"30–40 con / 0.5kg"},
   {name:"Mực 1 nắng", price:520000, image:"images/1nang.jpg", note:"2–4 con / 0.5kg"}
 ];
-
+const PRICE_SS = products.find(p => p.name === "Size SS").price;
+const PRICE_SA = products.find(p => p.name === "Size SA").price;
 let cart = [];
 
 /* ====== RENDER SẢN PHẨM ====== */
@@ -189,6 +310,25 @@ function addToCart(name, price){
   }
   renderCart();
 }
+/* ====== THÊM COMBO (LOGIC RIÊNG) ====== */
+function addCombo(name, comboKg, pricePerKg){
+  const item = cart.find(i => i.name === name);
+
+  if(item){
+    item.qty += 1; // tăng số combo
+  } else {
+    cart.push({
+      name: name,
+      price: pricePerKg, // giá 1 combo theo kg
+      qty: 1,            // số combo
+      isCombo: true,     // ĐÁNH DẤU COMBO
+      comboKg: comboKg  // kg cố định
+    });
+  }
+
+  renderCart();
+}
+
 
 /* ====== BƯỚC 3: QUẢN LÝ GIỎ ====== */
 function changeQty(name, delta){
@@ -218,33 +358,70 @@ function renderCart(){
 
   let total = 0;
 
-  box.innerHTML = cart.map(i => {
-    total += i.price * i.qty;
-    const weightKg = (i.qty * UNIT_KG).toFixed(1);
+box.innerHTML = cart.map(i => {
+  let itemTotal = i.price * i.qty;
+  total += itemTotal;
+
+  // ===== COMBO =====
+  if(i.isCombo){
+    const totalKg = (i.comboKg * i.qty).toFixed(1);
 
     return `
     <div class="flex justify-between items-center bg-gray-50 p-4 rounded-xl border">
       <div>
-        <b>${i.name} (${weightKg}kg)</b>
+        <b>${i.name} (${totalKg}kg)</b>
         <p class="text-sm text-gray-400">
-          ${i.price.toLocaleString()} ₫ / gói (0.5kg)
+          Giá đã bao gồm đóng gói & quà biếu
         </p>
       </div>
 
       <div class="flex items-center gap-3">
-        <div class="flex items-center border rounded-lg overflow-hidden">
-          <button onclick="changeQty('${i.name}', -1)"
-            class="px-3 py-1 font-bold hover:bg-gray-200">−</button>
-          <span class="px-3 font-bold">${i.qty}</span>
-          <button onclick="changeQty('${i.name}', 1)"
-            class="px-3 py-1 font-bold hover:bg-gray-200">+</button>
-        </div>
+<div class="flex items-center border rounded-lg overflow-hidden">
+  <button onclick="changeQty('${i.name}', -1)"
+    class="px-3 py-1 font-bold hover:bg-gray-200">−</button>
+  <span class="px-3 font-bold">${i.qty}</span>
+  <button onclick="changeQty('${i.name}', 1)"
+    class="px-3 py-1 font-bold hover:bg-gray-200">+</button>
+</div>
+
         <button onclick="removeItem('${i.name}')"
-          class="text-red-500 text-xs font-bold hover:underline">Xóa</button>
+          class="text-red-500 text-xs font-bold hover:underline">
+          Xóa
+        </button>
       </div>
     </div>
     `;
-  }).join("");
+  }
+
+  // ===== SẢN PHẨM THƯỜNG =====
+  const weightKg = (i.qty * UNIT_KG).toFixed(1);
+
+  return `
+  <div class="flex justify-between items-center bg-gray-50 p-4 rounded-xl border">
+    <div>
+      <b>${i.name} (${weightKg}kg)</b>
+      <p class="text-sm text-gray-400">
+        ${i.price.toLocaleString()} ₫ / gói (0.5kg)
+      </p>
+    </div>
+
+    <div class="flex items-center gap-3">
+      <div class="flex items-center border rounded-lg overflow-hidden">
+        <button onclick="changeQty('${i.name}', -1)"
+          class="px-3 py-1 font-bold hover:bg-gray-200">−</button>
+        <span class="px-3 font-bold">${i.qty}</span>
+        <button onclick="changeQty('${i.name}', 1)"
+          class="px-3 py-1 font-bold hover:bg-gray-200">+</button>
+      </div>
+      <button onclick="removeItem('${i.name}')"
+        class="text-red-500 text-xs font-bold hover:underline">
+        Xóa
+      </button>
+    </div>
+  </div>
+  `;
+}).join("");
+
 
   totalBox.innerText = total.toLocaleString() + " ₫";
 }
@@ -267,9 +444,13 @@ function sendOrder(){
     address: address,
     note: note,
     products: cart.map(i => {
-      const kg = i.qty * 0.5;
-      return `- ${i.name} x${i.qty} (${kg}kg)`;
-    }).join("\n"),
+  const kg = i.isCombo
+    ? i.qty * i.comboKg // dùng comboKg
+    : i.qty * 0.5; // sản phẩm thường
+
+  return `- ${i.name} x${i.qty} (${kg}kg)`;
+}).join("\n"),
+
     total: totalDisplay.innerText
   });
 
@@ -281,4 +462,3 @@ function sendOrder(){
 </script>
 </body>
 </html>
-
