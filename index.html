@@ -53,6 +53,30 @@
   .field-error { border-color: #dc2626 !important; }
   .error-msg   { color: #dc2626; font-size: 12px; margin-top: 4px; display: none; }
   .error-msg.show { display: block; }
+
+  /* ── COMBO CARD HIGHLIGHT ── */
+  :root {
+    --coral: #d94f2b;
+    --ocean: #1a4a6b;
+    --sand:  #f7f2eb;
+  }
+  .combo-best {
+    border: 2px solid var(--coral);
+    position: relative;
+    overflow: visible;
+  }
+  .combo-best::before {
+    content: '🔥 Bán chạy nhất';
+    position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+    background: var(--coral); color: #fff;
+    font-size: 11px; font-weight: 700; padding: 3px 14px; border-radius: 999px;
+    white-space: nowrap;
+  }
+
+  /* ── REVIEW ── */
+  .review-card { transition: box-shadow .2s; }
+  .review-card:hover { box-shadow: 0 4px 24px rgba(26,17,8,.09); }
+  .stars { color: #f59e0b; letter-spacing: 1px; }
 </style>
 </head>
 
@@ -77,13 +101,14 @@
       <a href="#order"    class="hover:text-orange-600 transition">Đặt hàng</a>
     </nav>
     <!-- Cart icon (mobile) -->
-    <a href="#order" class="relative md:hidden" aria-label="Giỏ hàng">
+    <a href="#order" class="relative" aria-label="Giỏ hàng">
       <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
           d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.4 7h12.8M7 13L5.4 5M17 21a1 1 0 100-2 1 1 0 000 2zm-10 0a1 1 0 100-2 1 1 0 000 2z"/>
       </svg>
       <span id="cartBadge"
-        class="absolute -top-2 -right-2 bg-orange-600 text-white text-[10px] font-bold rounded-full w-5 h-5 flex items-center justify-center hidden"
+        class="absolute -top-2 -right-2 text-white text-[10px] font-bold rounded-full w-5 h-5 flex items-center justify-center hidden"
+        style="background:var(--coral)"
         aria-label="Số sản phẩm trong giỏ">0</span>
     </a>
   </div>
@@ -150,41 +175,47 @@
 <!-- ═══════════════════════════════════════════════
      COMBO QUÀ BIẾU
 ════════════════════════════════════════════════ -->
-<section class="bg-gray-50 py-16">
+<section class="py-16 bg-white">
   <div class="max-w-6xl mx-auto px-4">
-    <h2 class="text-2xl font-bold text-center mb-2">Gợi ý quà biếu được ưa chuộng</h2>
-    <p class="text-center text-gray-500 text-sm mb-10">Chọn nhanh – Đặt ngay – Giao tận nhà</p>
-    <div class="grid md:grid-cols-2 gap-8">
+    <p class="text-center text-[11px] uppercase tracking-widest text-gray-400 mb-2">Quà biếu cao cấp</p>
+    <h2 class="text-2xl font-bold text-center mb-2">Gợi ý combo được chọn nhiều nhất</h2>
+    <p class="text-center text-gray-500 text-sm mb-12">Chọn nhanh – Đặt ngay – Giao tận nhà · Miễn phí hộp & túi quà</p>
+    <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
 
-      <!-- COMBO 1: Tinh Hoa 1kg -->
-      <div class="border rounded-2xl p-6 text-center bg-white hover:shadow-md transition-shadow">
-        <span class="inline-block text-xs uppercase tracking-widest text-orange-500 font-semibold
-                     bg-orange-50 px-3 py-1 rounded-full mb-3">Được chọn nhiều nhất</span>
-        <h3 class="text-xl font-semibold">🎁 Combo Tinh Hoa (1kg)</h3>
-        <ul class="mt-4 space-y-1 text-gray-600 text-sm text-left max-w-xs mx-auto">
-          <li>• 2 gói mực câu chọn lọc size SS đẹp, đồng đều</li>
-          <li>• Hộp + túi quà cao cấp</li>
-          <li>• Phù hợp biếu gia đình, người thân</li>
+      <!-- COMBO SS -->
+      <div class="combo-best rounded-2xl p-7 text-center bg-white" style="margin-top:16px">
+        <div class="text-4xl mb-3">🎁</div>
+        <h3 class="text-xl font-bold mb-1">Combo Tinh Hoa</h3>
+        <p class="text-sm text-gray-500 mb-4">1kg · 2 gói mực Size SS chọn lọc</p>
+        <ul class="text-sm text-gray-600 text-left space-y-2 mb-5 max-w-xs mx-auto">
+          <li class="flex gap-2"><span class="text-green-500 mt-0.5">✓</span> 3–4 con / gói, size đẹp đồng đều</li>
+          <li class="flex gap-2"><span class="text-green-500 mt-0.5">✓</span> Hộp cứng + túi quà cao cấp</li>
+          <li class="flex gap-2"><span class="text-green-500 mt-0.5">✓</span> Phù hợp biếu gia đình, người thân</li>
+          <li class="flex gap-2"><span class="text-green-500 mt-0.5">✓</span> Giao nhanh 24h nội thành</li>
         </ul>
-        <p class="mt-4 text-orange-600 font-bold text-lg" id="comboSSPrice"></p>
+        <p class="text-2xl font-extrabold mb-1 text-orange-600" id="comboSSPrice"></p>
+        <p class="text-xs text-gray-400 mb-5">Tiết kiệm hơn mua lẻ</p>
         <button onclick="Cart.addCombo('combo-ss', 'Combo Tinh Hoa (1kg)', 1)"
                 class="mt-4 px-8 py-3 bg-black text-white rounded-full font-semibold
                        hover:bg-orange-600 transition-colors duration-200">
           Chọn combo này
         </button>
+		
       </div>
 
-      <!-- COMBO 2: Trân Quý 2kg -->
-      <div class="border rounded-2xl p-6 text-center bg-white hover:shadow-md transition-shadow">
-        <span class="inline-block text-xs uppercase tracking-widest text-blue-600 font-semibold
-                     bg-blue-50 px-3 py-1 rounded-full mb-3">Phù hợp biếu đối tác</span>
-        <h3 class="text-xl font-semibold">🎁 Combo Trân Quý (2kg)</h3>
-        <ul class="mt-4 space-y-1 text-gray-600 text-sm text-left max-w-xs mx-auto">
-          <li>• Tuyển chọn 4 gói mực câu size SA đẹp (ưu tiên biếu)</li>
-          <li>• Đóng hộp sang trọng – chỉnh chu</li>
-          <li>• Miễn phí giao nhanh</li>
+      <!-- COMBO SA -->
+      <div class="border-2 border-gray-200 rounded-2xl p-7 text-center bg-white hover:shadow-lg transition-shadow" style="margin-top:16px">
+        <div class="text-4xl mb-3">🏆</div>
+        <h3 class="text-xl font-bold mb-1">Combo Trân Quý</h3>
+        <p class="text-sm text-gray-500 mb-4">2kg · 4 gói mực Size SA chọn lọc</p>
+        <ul class="text-sm text-gray-600 text-left space-y-2 mb-5 max-w-xs mx-auto">
+          <li class="flex gap-2"><span class="text-green-500 mt-0.5">✓</span> 5–6 con / gói, size ưu tiên biếu đối tác</li>
+          <li class="flex gap-2"><span class="text-green-500 mt-0.5">✓</span> Hộp sang trọng chỉnh chu</li>
+          <li class="flex gap-2"><span class="text-green-500 mt-0.5">✓</span> Miễn phí giao nhanh toàn quốc</li>
+          <li class="flex gap-2"><span class="text-green-500 mt-0.5">✓</span> Kèm thiệp cảm ơn theo yêu cầu</li>
         </ul>
-        <p class="mt-4 text-orange-600 font-bold text-lg" id="comboSAPrice"></p>
+        <p class="text-2xl font-extrabold mb-1" style="color:var(--ocean)" id="comboSAPrice"></p>
+        <p class="text-xs text-gray-400 mb-5">Lý tưởng biếu đối tác, sếp, khách hàng</p>
         <button onclick="Cart.addCombo('combo-sa', 'Combo Trân Quý (2kg)', 2)"
                 class="mt-4 px-8 py-3 bg-black text-white rounded-full font-semibold
                        hover:bg-orange-600 transition-colors duration-200">
@@ -199,7 +230,7 @@
 <!-- ═══════════════════════════════════════════════
      PRODUCTS
 ════════════════════════════════════════════════ -->
-<section id="products" class="py-16 bg-white">
+<section id="products" class="py-16 bg-gray-50">
   <div class="max-w-7xl mx-auto px-4">
 
     <div class="text-center mb-8">
@@ -209,7 +240,7 @@
 
     <!-- Trust badges -->
     <div class="max-w-5xl mx-auto mb-10 grid md:grid-cols-2 gap-6">
-      <div class="bg-gray-50 rounded-2xl px-6 py-4 border">
+      <div class="bg-white rounded-2xl px-6 py-4 border">
         <p class="text-sm font-semibold text-gray-800 mb-2">Tiêu chuẩn đóng gói</p>
         <ul class="text-sm text-gray-600 space-y-1">
           <li>• Trọng lượng: <b>0.5kg / gói</b></li>
@@ -217,15 +248,15 @@
         </ul>
       </div>
       <div class="grid grid-cols-3 gap-3 text-center text-sm text-gray-700">
-        <div class="bg-gray-50 rounded-2xl py-3 border">
+        <div class="bg-white rounded-2xl py-3 border">
           <span class="block text-xl mb-1" aria-hidden="true">⭐</span>
           2.000+ khách tin chọn
         </div>
-        <div class="bg-gray-50 rounded-2xl py-3 border">
+        <div class="bg-white rounded-2xl py-3 border">
           <span class="block text-xl mb-1" aria-hidden="true">🚚</span>
           Giao nhanh 24–48h
         </div>
-        <div class="bg-gray-50 rounded-2xl py-3 border">
+        <div class="bg-white rounded-2xl py-3 border">
           <span class="block text-xl mb-1" aria-hidden="true">🎁</span>
           Miễn phí túi & hộp quà từ 1kg
         </div>
@@ -239,9 +270,70 @@
 </section>
 
 <!-- ═══════════════════════════════════════════════
+     ĐÁNH GIÁ KHÁCH HÀNG
+════════════════════════════════════════════════ -->
+<section id="reviews" class="py-16" style="background:var(--sand)">
+  <div class="max-w-6xl mx-auto px-4">
+    <p class="text-center text-[11px] uppercase tracking-widest text-gray-400 mb-2">Khách hàng nói gì</p>
+    <h2 class="text-2xl font-bold text-center mb-10">Đánh giá thật từ khách hàng</h2>
+
+    <div class="grid md:grid-cols-3 gap-6">
+
+      <div class="review-card bg-white rounded-2xl p-6 border">
+        <div class="stars mb-3">★★★★★</div>
+        <p class="text-sm text-gray-700 leading-relaxed mb-4">"Mua về biếu ba mẹ dịp Tết, cả nhà khen ngon. Mực dày, ngọt, không bị mặn hay có mùi lạ. Đóng gói rất đẹp, nhìn sang như mua ở siêu thị cao cấp."</p>
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-full bg-amber-100 flex items-center justify-center font-bold text-amber-700 text-sm">Th</div>
+          <div>
+            <p class="text-xs font-semibold">Chị Thanh</p>
+            <p class="text-xs text-gray-400">TP. Hồ Chí Minh · Mua Size SS</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card bg-white rounded-2xl p-6 border">
+        <div class="stars mb-3">★★★★★</div>
+        <p class="text-sm text-gray-700 leading-relaxed mb-4">"Đặt lần đầu thử, ăn xong đặt liền lần 2. Mực câu tay nên thịt chắc hơn hẳn loại ngoài chợ. Giao hàng đúng hẹn, shop nhắn tin theo dõi đơn rất nhiệt tình."</p>
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-full bg-orange-100 flex items-center justify-center font-bold text-orange-700 text-sm">An</div>
+          <div>
+            <p class="text-xs font-semibold">Anh Tuấn</p>
+            <p class="text-xs text-gray-400">Đà Nẵng · Mua Combo Tinh Hoa</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card bg-white rounded-2xl p-6 border">
+        <div class="stars mb-3">★★★★★</div>
+        <p class="text-sm text-gray-700 leading-relaxed mb-4">"Mua làm quà cho đối tác, ai cũng khen. Hộp đựng sang trọng, mực thơm ngon đặc trưng. Sẽ tiếp tục ủng hộ shop mỗi dịp lễ Tết. Giá hợp lý so với chất lượng."</p>
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-full bg-blue-100 flex items-center justify-center font-bold text-blue-700 text-sm">Hu</div>
+          <div>
+            <p class="text-xs font-semibold">Chị Hương</p>
+            <p class="text-xs text-gray-400">Hà Nội · Mua Combo Trân Quý</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CTA sau review -->
+    <div class="text-center mt-7">
+      <p class="text-sm text-gray-500 mb-0.5">Bạn cũng muốn trải nghiệm? Đặt ngay hôm nay.</p>
+    <a href="#products"
+       class="inline-block mt-5 px-8 py-3 bg-black text-white rounded-full font-semibold
+              tracking-wide hover:bg-orange-600 transition-colors duration-200">
+      Đặt hàng ngay
+    </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
      ORDER
 ════════════════════════════════════════════════ -->
-<section id="order" class="py-20 bg-gray-50">
+<section id="order" class="py-20 bg-white">
   <div class="max-w-6xl mx-auto px-4 grid lg:grid-cols-2 gap-16">
 
     <!-- Cart -->
@@ -388,13 +480,13 @@
     ['combo-ss', {
       name   : 'Combo Tinh Hoa (1kg)',
       kg     : CFG.COMBO_SS_KG,
-      price  : PRODUCT_MAP.get('ss').price * 2,   // 2 gói SS = 1kg
+      price  : PRODUCT_MAP.get('ss').price * 1.96,   // 2 gói SS = 1kg
       desc   : 'Hộp + túi quà, phù hợp biếu gia đình',
     }],
     ['combo-sa', {
       name   : 'Combo Trân Quý (2kg)',
       kg     : CFG.COMBO_SA_KG,
-      price  : PRODUCT_MAP.get('sa').price * 4,   // 4 gói SA = 2kg
+      price  : PRODUCT_MAP.get('sa').price * 3.96,   // 4 gói SA = 2kg
       desc   : 'Hộp sang trọng, miễn phí giao nhanh',
     }],
   ]);
