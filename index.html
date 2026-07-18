@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="vi" id="htmlRoot">
 <head>
 <meta charset="UTF-8">
 <title>Khô Mực Tam Tiến | Dried Squid</title>
@@ -66,7 +66,7 @@
     overflow: visible;
   }
   .combo-best::before {
-    content: '🔥 Bán chạy nhất';
+    content: attr(data-badge);
     position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
     background: var(--coral); color: #fff;
     font-size: 11px; font-weight: 700; padding: 3px 14px; border-radius: 999px;
@@ -77,6 +77,21 @@
   .review-card { transition: box-shadow .2s; }
   .review-card:hover { box-shadow: 0 4px 24px rgba(26,17,8,.09); }
   .stars { color: #f59e0b; letter-spacing: 1px; }
+
+  /* ── LANGUAGE TOGGLE ── */
+  .lang-btn {
+    padding: 5px 11px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .04em;
+    transition: background-color .2s, color .2s;
+    color: #6b7280;
+  }
+  .lang-btn.active {
+    background: #111;
+    color: #fff;
+  }
 </style>
 </head>
 
@@ -96,21 +111,31 @@
       <img src="images/logo.png" class="w-14 h-14 object-contain" alt="Logo Dried Squid" width="56" height="56">
       <b class="text-lg uppercase tracking-tighter">Dried Squid</b>
     </a>
-    <nav class="hidden md:flex gap-10 text-xs font-bold uppercase" aria-label="Điều hướng chính">
-      <a href="#products" class="hover:text-orange-600 transition">Sản phẩm</a>
-      <a href="#order"    class="hover:text-orange-600 transition">Đặt hàng</a>
-    </nav>
-    <!-- Cart icon (mobile) -->
-    <a href="#order" class="relative" aria-label="Giỏ hàng">
-      <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-          d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.4 7h12.8M7 13L5.4 5M17 21a1 1 0 100-2 1 1 0 000 2zm-10 0a1 1 0 100-2 1 1 0 000 2z"/>
-      </svg>
-      <span id="cartBadge"
-        class="absolute -top-2 -right-2 text-white text-[10px] font-bold rounded-full w-5 h-5 flex items-center justify-center hidden"
-        style="background:var(--coral)"
-        aria-label="Số sản phẩm trong giỏ">0</span>
-    </a>
+
+    <div class="flex items-center gap-3 md:gap-6">
+      <nav class="hidden md:flex gap-10 text-xs font-bold uppercase" aria-label="Điều hướng chính">
+        <a href="#products" class="hover:text-orange-600 transition" data-i18n="nav_products">Sản phẩm</a>
+        <a href="#order"    class="hover:text-orange-600 transition" data-i18n="nav_order">Đặt hàng</a>
+      </nav>
+
+      <!-- Language toggle -->
+      <div class="flex items-center border rounded-full p-0.5" role="group" aria-label="Ngôn ngữ / Language">
+        <button id="langViBtn" type="button" onclick="setLang('vi')" class="lang-btn">VIE</button>
+        <button id="langEnBtn" type="button" onclick="setLang('en')" class="lang-btn">ENG</button>
+      </div>
+
+      <!-- Cart icon (mobile) -->
+      <a href="#order" class="relative" aria-label="Giỏ hàng">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.4 7h12.8M7 13L5.4 5M17 21a1 1 0 100-2 1 1 0 000 2zm-10 0a1 1 0 100-2 1 1 0 000 2z"/>
+        </svg>
+        <span id="cartBadge"
+          class="absolute -top-2 -right-2 text-white text-[10px] font-bold rounded-full w-5 h-5 flex items-center justify-center hidden"
+          style="background:var(--coral)"
+          aria-label="Số sản phẩm trong giỏ">0</span>
+      </a>
+    </div>
   </div>
 </header>
 <div class="h-[72px]"></div>
@@ -120,31 +145,32 @@
 ════════════════════════════════════════════════ -->
 <section class="max-w-7xl mx-auto px-4 py-12 grid md:grid-cols-2 gap-10 items-center">
   <div>
-    <p class="text-xs uppercase tracking-widest text-gray-400 mb-3">Đặc sản biển Quảng Nam</p>
+    <p class="text-xs uppercase tracking-widest text-gray-400 mb-3" data-i18n="hero_kicker">Đặc sản biển Quảng Nam</p>
     <h1 class="text-4xl md:text-5xl font-extrabold leading-tight">
       Dried Squid<br>
-      <span class="text-gray-400 font-light">The Gift Of Nature</span>
+      <span class="text-gray-400 font-light" data-i18n="hero_title_sub">The Gift Of Nature</span>
     </h1>
-    <p class="mt-4 text-lg italic text-gray-500">
+    <p class="mt-4 text-lg italic text-gray-500" data-i18n="hero_quote">
       "Không chỉ là khô mực – mà là một món quà từ biển."
     </p>
-    <p class="mt-5 text-xl font-semibold text-gray-800">
+    <p class="mt-5 text-xl font-semibold text-gray-800" data-i18n="hero_subtitle">
       Tinh hoa biển cả – Chuẩn mực quà biếu tặng cao cấp
     </p>
-    <p class="mt-3 text-gray-600 leading-relaxed max-w-xl">
+    <p class="mt-3 text-gray-600 leading-relaxed max-w-xl" data-i18n="hero_desc">
       Khô mực câu tự nhiên được chọn lọc từ vùng biển Tam Tiến – Quảng Nam,
       chế biến thủ công theo phương pháp truyền thống, giữ trọn
       vị ngọt thanh của biển cả.
     </p>
     <ul class="mt-5 space-y-2 text-gray-700 text-sm">
-      <li class="flex items-start gap-2"><span class="text-green-600 mt-0.5">✔</span> Phơi nắng tự nhiên – thịt dày, dai mềm, vị ngọt thanh đặc trưng</li>
-      <li class="flex items-start gap-2"><span class="text-green-600 mt-0.5">✔</span> Không tẩm ướp – không phụ gia – không hóa chất</li>
-      <li class="flex items-start gap-2"><span class="text-green-600 mt-0.5">✔</span> Đóng gói sang trọng, hút chân không – xứng đáng làm quà biếu</li>
-      <li class="flex items-start gap-2"><span class="text-green-600 mt-0.5">✔</span> Cam kết chất lượng – hoàn tiền nếu không đúng mô tả</li>
+      <li class="flex items-start gap-2"><span class="text-green-600 mt-0.5">✔</span> <span data-i18n="hero_feat1">Phơi nắng tự nhiên – thịt dày, dai mềm, vị ngọt thanh đặc trưng</span></li>
+      <li class="flex items-start gap-2"><span class="text-green-600 mt-0.5">✔</span> <span data-i18n="hero_feat2">Không tẩm ướp – không phụ gia – không hóa chất</span></li>
+      <li class="flex items-start gap-2"><span class="text-green-600 mt-0.5">✔</span> <span data-i18n="hero_feat3">Đóng gói sang trọng, hút chân không – xứng đáng làm quà biếu</span></li>
+      <li class="flex items-start gap-2"><span class="text-green-600 mt-0.5">✔</span> <span data-i18n="hero_feat4">Cam kết chất lượng – hoàn tiền nếu không đúng mô tả</span></li>
     </ul>
     <a href="#products"
        class="inline-block mt-8 px-8 py-3 bg-black text-white rounded-full font-semibold
-              tracking-wide hover:bg-orange-600 transition-colors duration-200">
+              tracking-wide hover:bg-orange-600 transition-colors duration-200"
+       data-i18n="hero_cta">
       Đặt hàng ngay – Giao tận nơi
     </a>
   </div>
@@ -161,9 +187,9 @@
      STORY
 ════════════════════════════════════════════════ -->
 <section class="max-w-5xl mx-auto px-4 py-16 text-center">
-  <p class="text-xs uppercase tracking-widest text-gray-400 mb-4">Câu chuyện từ biển</p>
-  <h2 class="text-2xl font-semibold mb-4">Mỗi con mực là một lựa chọn</h2>
-  <p class="text-gray-600 leading-relaxed max-w-3xl mx-auto">
+  <p class="text-xs uppercase tracking-widest text-gray-400 mb-4" data-i18n="story_kicker">Câu chuyện từ biển</p>
+  <h2 class="text-2xl font-semibold mb-4" data-i18n="story_title">Mỗi con mực là một lựa chọn</h2>
+  <p class="text-gray-600 leading-relaxed max-w-3xl mx-auto" data-i18n-html="story_body">
     Dried Squid được tuyển chọn từ mực câu tự nhiên vùng biển Tam Tiến – Quảng Nam,
     đánh bắt theo mùa, phơi nắng tự nhiên và đóng gói cẩn trọng từng gói.
     <br><br>
@@ -177,48 +203,49 @@
 ════════════════════════════════════════════════ -->
 <section class="py-16 bg-white">
   <div class="max-w-6xl mx-auto px-4">
-    <p class="text-center text-[11px] uppercase tracking-widest text-gray-400 mb-2">Quà biếu cao cấp</p>
-    <h2 class="text-2xl font-bold text-center mb-2">Gợi ý combo được chọn nhiều nhất</h2>
-    <p class="text-center text-gray-500 text-sm mb-12">Chọn nhanh – Đặt ngay – Giao tận nhà · Miễn phí hộp & túi quà</p>
+    <p class="text-center text-[11px] uppercase tracking-widest text-gray-400 mb-2" data-i18n="combo_kicker">Quà biếu cao cấp</p>
+    <h2 class="text-2xl font-bold text-center mb-2" data-i18n="combo_title">Gợi ý combo được chọn nhiều nhất</h2>
+    <p class="text-center text-gray-500 text-sm mb-12" data-i18n="combo_sub">Chọn nhanh – Đặt ngay – Giao tận nhà · Miễn phí hộp & túi quà</p>
     <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
 
       <!-- COMBO SS -->
-      <div class="combo-best rounded-2xl p-7 text-center bg-white" style="margin-top:16px">
+      <div class="combo-best rounded-2xl p-7 text-center bg-white" style="margin-top:16px" data-badge="🔥 Bán chạy nhất" id="comboSSCard">
         <div class="text-4xl mb-3">🎁</div>
-        <h3 class="text-xl font-bold mb-1">Combo Tinh Hoa</h3>
-        <p class="text-sm text-gray-500 mb-4">1kg · 2 gói mực Size SS chọn lọc</p>
+        <h3 class="text-xl font-bold mb-1" data-i18n="combo_ss_title">Combo Tinh Hoa</h3>
+        <p class="text-sm text-gray-500 mb-4" data-i18n="combo_ss_weight">1kg · 2 gói mực Size SS chọn lọc</p>
         <ul class="text-sm text-gray-600 text-left space-y-2 mb-5 max-w-xs mx-auto">
-          <li class="flex gap-2"><span class="text-green-500 mt-0.5">✓</span> 3–4 con / gói, size đẹp đồng đều</li>
-          <li class="flex gap-2"><span class="text-green-500 mt-0.5">✓</span> Hộp cứng + túi quà cao cấp</li>
-          <li class="flex gap-2"><span class="text-green-500 mt-0.5">✓</span> Phù hợp biếu gia đình, người thân</li>
-          <li class="flex gap-2"><span class="text-green-500 mt-0.5">✓</span> Giao nhanh 24h nội thành</li>
+          <li class="flex gap-2"><span class="text-green-500 mt-0.5">✓</span> <span data-i18n="combo_ss_feat1">3–4 con / gói, size đẹp đồng đều</span></li>
+          <li class="flex gap-2"><span class="text-green-500 mt-0.5">✓</span> <span data-i18n="combo_ss_feat2">Hộp cứng + túi quà cao cấp</span></li>
+          <li class="flex gap-2"><span class="text-green-500 mt-0.5">✓</span> <span data-i18n="combo_ss_feat3">Phù hợp biếu gia đình, người thân</span></li>
+          <li class="flex gap-2"><span class="text-green-500 mt-0.5">✓</span> <span data-i18n="combo_ss_feat4">Giao nhanh 24h nội thành</span></li>
         </ul>
         <p class="text-2xl font-extrabold mb-1 text-orange-600" id="comboSSPrice"></p>
-        <p class="text-xs text-gray-400 mb-5">Tiết kiệm hơn mua lẻ</p>
-        <button onclick="Cart.addCombo('combo-ss', 'Combo Tinh Hoa (1kg)', 1)"
+        <p class="text-xs text-gray-400 mb-5" data-i18n="combo_ss_note">Tiết kiệm hơn mua lẻ</p>
+        <button onclick="Cart.addCombo('combo-ss', 1)"
                 class="mt-4 px-8 py-3 bg-black text-white rounded-full font-semibold
-                       hover:bg-orange-600 transition-colors duration-200">
+                       hover:bg-orange-600 transition-colors duration-200"
+                data-i18n="combo_btn">
           Chọn combo này
         </button>
-		
       </div>
 
       <!-- COMBO SA -->
       <div class="border-2 border-gray-200 rounded-2xl p-7 text-center bg-white hover:shadow-lg transition-shadow" style="margin-top:16px">
         <div class="text-4xl mb-3">🏆</div>
-        <h3 class="text-xl font-bold mb-1">Combo Trân Quý</h3>
-        <p class="text-sm text-gray-500 mb-4">2kg · 4 gói mực Size SA chọn lọc</p>
+        <h3 class="text-xl font-bold mb-1" data-i18n="combo_sa_title">Combo Trân Quý</h3>
+        <p class="text-sm text-gray-500 mb-4" data-i18n="combo_sa_weight">2kg · 4 gói mực Size SA chọn lọc</p>
         <ul class="text-sm text-gray-600 text-left space-y-2 mb-5 max-w-xs mx-auto">
-          <li class="flex gap-2"><span class="text-green-500 mt-0.5">✓</span> 5–6 con / gói, size ưu tiên biếu đối tác</li>
-          <li class="flex gap-2"><span class="text-green-500 mt-0.5">✓</span> Hộp sang trọng chỉnh chu</li>
-          <li class="flex gap-2"><span class="text-green-500 mt-0.5">✓</span> Miễn phí giao nhanh toàn quốc</li>
-          <li class="flex gap-2"><span class="text-green-500 mt-0.5">✓</span> Kèm thiệp cảm ơn theo yêu cầu</li>
+          <li class="flex gap-2"><span class="text-green-500 mt-0.5">✓</span> <span data-i18n="combo_sa_feat1">5–6 con / gói, size ưu tiên biếu đối tác</span></li>
+          <li class="flex gap-2"><span class="text-green-500 mt-0.5">✓</span> <span data-i18n="combo_sa_feat2">Hộp sang trọng chỉnh chu</span></li>
+          <li class="flex gap-2"><span class="text-green-500 mt-0.5">✓</span> <span data-i18n="combo_sa_feat3">Miễn phí giao nhanh toàn quốc</span></li>
+          <li class="flex gap-2"><span class="text-green-500 mt-0.5">✓</span> <span data-i18n="combo_sa_feat4">Kèm thiệp cảm ơn theo yêu cầu</span></li>
         </ul>
         <p class="text-2xl font-extrabold mb-1" style="color:var(--ocean)" id="comboSAPrice"></p>
-        <p class="text-xs text-gray-400 mb-5">Lý tưởng biếu đối tác, sếp, khách hàng</p>
-        <button onclick="Cart.addCombo('combo-sa', 'Combo Trân Quý (2kg)', 2)"
+        <p class="text-xs text-gray-400 mb-5" data-i18n="combo_sa_note">Lý tưởng biếu đối tác, sếp, khách hàng</p>
+        <button onclick="Cart.addCombo('combo-sa', 2)"
                 class="mt-4 px-8 py-3 bg-black text-white rounded-full font-semibold
-                       hover:bg-orange-600 transition-colors duration-200">
+                       hover:bg-orange-600 transition-colors duration-200"
+                data-i18n="combo_btn">
           Chọn combo này
         </button>
       </div>
@@ -234,31 +261,31 @@
   <div class="max-w-7xl mx-auto px-4">
 
     <div class="text-center mb-8">
-      <h2 class="text-3xl font-bold uppercase tracking-wide">Danh mục sản phẩm</h2>
-      <p class="mt-2 text-gray-500 text-sm">Tuyển chọn khô mực câu – xứng đáng cho biếu tặng & thưởng thức</p>
+      <h2 class="text-3xl font-bold uppercase tracking-wide" data-i18n="products_title">Danh mục sản phẩm</h2>
+      <p class="mt-2 text-gray-500 text-sm" data-i18n="products_sub">Tuyển chọn khô mực câu – xứng đáng cho biếu tặng & thưởng thức</p>
     </div>
 
     <!-- Trust badges -->
     <div class="max-w-5xl mx-auto mb-10 grid md:grid-cols-2 gap-6">
       <div class="bg-white rounded-2xl px-6 py-4 border">
-        <p class="text-sm font-semibold text-gray-800 mb-2">Tiêu chuẩn đóng gói</p>
+        <p class="text-sm font-semibold text-gray-800 mb-2" data-i18n="pkg_standard_title">Tiêu chuẩn đóng gói</p>
         <ul class="text-sm text-gray-600 space-y-1">
-          <li>• Trọng lượng: <b>0.5kg / gói</b></li>
-          <li>• Kích thước hộp: <b>35 × 25 × 5 cm</b></li>
+          <li><span data-i18n="pkg_weight_label">• Trọng lượng: </span><b>0.5kg / <span data-i18n="pkg_per_pack">gói</span></b></li>
+          <li><span data-i18n="pkg_box_label">• Kích thước hộp: </span><b>35 × 25 × 5 cm</b></li>
         </ul>
       </div>
       <div class="grid grid-cols-3 gap-3 text-center text-sm text-gray-700">
         <div class="bg-white rounded-2xl py-3 border">
           <span class="block text-xl mb-1" aria-hidden="true">⭐</span>
-          2.000+ khách tin chọn
+          <span data-i18n="trust1">2.000+ khách tin chọn</span>
         </div>
         <div class="bg-white rounded-2xl py-3 border">
           <span class="block text-xl mb-1" aria-hidden="true">🚚</span>
-          Giao nhanh 24–48h
+          <span data-i18n="trust2">Giao nhanh 24–48h</span>
         </div>
         <div class="bg-white rounded-2xl py-3 border">
           <span class="block text-xl mb-1" aria-hidden="true">🎁</span>
-          Miễn phí túi & hộp quà từ 1kg
+          <span data-i18n="trust3">Miễn phí túi & hộp quà từ 1kg</span>
         </div>
       </div>
     </div>
@@ -274,57 +301,20 @@
 ════════════════════════════════════════════════ -->
 <section id="reviews" class="py-16" style="background:var(--sand)">
   <div class="max-w-6xl mx-auto px-4">
-    <p class="text-center text-[11px] uppercase tracking-widest text-gray-400 mb-2">Khách hàng nói gì</p>
-    <h2 class="text-2xl font-bold text-center mb-10">Đánh giá thật từ khách hàng</h2>
+    <p class="text-center text-[11px] uppercase tracking-widest text-gray-400 mb-2" data-i18n="reviews_kicker">Khách hàng nói gì</p>
+    <h2 class="text-2xl font-bold text-center mb-10" data-i18n="reviews_title">Đánh giá thật từ khách hàng</h2>
 
-    <div class="grid md:grid-cols-3 gap-6">
-
-      <div class="review-card bg-white rounded-2xl p-6 border">
-        <div class="stars mb-3">★★★★★</div>
-        <p class="text-sm text-gray-700 leading-relaxed mb-4">"Mua về biếu ba mẹ dịp Tết, cả nhà khen ngon. Mực dày, ngọt, không bị mặn hay có mùi lạ. Đóng gói rất đẹp, nhìn sang như mua ở siêu thị cao cấp."</p>
-        <div class="flex items-center gap-3">
-          <div class="w-9 h-9 rounded-full bg-amber-100 flex items-center justify-center font-bold text-amber-700 text-sm">Th</div>
-          <div>
-            <p class="text-xs font-semibold">Chị Thanh</p>
-            <p class="text-xs text-gray-400">TP. Hồ Chí Minh · Mua Size SS</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="review-card bg-white rounded-2xl p-6 border">
-        <div class="stars mb-3">★★★★★</div>
-        <p class="text-sm text-gray-700 leading-relaxed mb-4">"Đặt lần đầu thử, ăn xong đặt liền lần 2. Mực câu tay nên thịt chắc hơn hẳn loại ngoài chợ. Giao hàng đúng hẹn, shop nhắn tin theo dõi đơn rất nhiệt tình."</p>
-        <div class="flex items-center gap-3">
-          <div class="w-9 h-9 rounded-full bg-orange-100 flex items-center justify-center font-bold text-orange-700 text-sm">An</div>
-          <div>
-            <p class="text-xs font-semibold">Anh Tuấn</p>
-            <p class="text-xs text-gray-400">Đà Nẵng · Mua Combo Tinh Hoa</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="review-card bg-white rounded-2xl p-6 border">
-        <div class="stars mb-3">★★★★★</div>
-        <p class="text-sm text-gray-700 leading-relaxed mb-4">"Mua làm quà cho đối tác, ai cũng khen. Hộp đựng sang trọng, mực thơm ngon đặc trưng. Sẽ tiếp tục ủng hộ shop mỗi dịp lễ Tết. Giá hợp lý so với chất lượng."</p>
-        <div class="flex items-center gap-3">
-          <div class="w-9 h-9 rounded-full bg-blue-100 flex items-center justify-center font-bold text-blue-700 text-sm">Hu</div>
-          <div>
-            <p class="text-xs font-semibold">Chị Hương</p>
-            <p class="text-xs text-gray-400">Hà Nội · Mua Combo Trân Quý</p>
-          </div>
-        </div>
-      </div>
-
-    </div>
+    <div class="grid md:grid-cols-3 gap-6" id="reviewGrid" role="list"></div>
 
     <!-- CTA sau review -->
     <div class="text-center mt-7">
-      <p class="text-sm text-gray-500 mb-0.5">Bạn cũng muốn trải nghiệm? Đặt ngay hôm nay.</p>
-    <a href="#products"
-       class="inline-block mt-5 px-8 py-3 bg-black text-white rounded-full font-semibold
-              tracking-wide hover:bg-orange-600 transition-colors duration-200">
-      Đặt hàng ngay
-    </a>
+      <p class="text-sm text-gray-500 mb-0.5" data-i18n="reviews_cta_text">Bạn cũng muốn trải nghiệm? Đặt ngay hôm nay.</p>
+      <a href="#products"
+         class="inline-block mt-5 px-8 py-3 bg-black text-white rounded-full font-semibold
+                tracking-wide hover:bg-orange-600 transition-colors duration-200"
+         data-i18n="reviews_cta_btn">
+        Đặt hàng ngay
+      </a>
     </div>
 
   </div>
@@ -338,27 +328,28 @@
 
     <!-- Cart -->
     <div>
-      <h2 class="text-2xl font-bold mb-6">🛒 Giỏ hàng của bạn</h2>
+      <h2 class="text-2xl font-bold mb-6" data-i18n="cart_title">🛒 Giỏ hàng của bạn</h2>
       <div id="cartContent" role="list" aria-label="Danh sách sản phẩm trong giỏ" class="space-y-3 mb-6">
-        <p class="text-gray-400 italic text-center py-10">Giỏ hàng đang trống...</p>
+        <p class="text-gray-400 italic text-center py-10" data-i18n="cart_empty">Giỏ hàng đang trống...</p>
       </div>
       <div class="border-t pt-4 flex justify-between items-center">
-        <span class="text-gray-600 font-medium">Tổng cộng</span>
+        <span class="text-gray-600 font-medium" data-i18n="cart_total_label">Tổng cộng</span>
         <span id="totalDisplay" class="text-xl font-bold text-orange-600" aria-live="polite">0 ₫</span>
       </div>
-      <p class="text-xs text-gray-400 mt-2">* Phí vận chuyển sẽ được xác nhận qua Zalo</p>
+      <p class="text-xs text-gray-400 mt-2" data-i18n="cart_shipping_note">* Phí vận chuyển sẽ được xác nhận qua Zalo</p>
     </div>
 
     <!-- Form -->
     <div>
-      <h2 class="text-2xl font-bold mb-6">Thông tin đặt hàng</h2>
+      <h2 class="text-2xl font-bold mb-6" data-i18n="order_form_title">Thông tin đặt hàng</h2>
       <form id="orderForm" novalidate class="space-y-4" aria-label="Form đặt hàng">
 
         <div>
           <label for="name" class="block text-sm font-medium text-gray-700 mb-1">
-            Họ và tên <span class="text-red-500" aria-label="bắt buộc">*</span>
+            <span data-i18n="label_name">Họ và tên</span> <span class="text-red-500" aria-label="bắt buộc">*</span>
           </label>
           <input id="name" type="text" autocomplete="name"
+                 data-i18n-placeholder="placeholder_name"
                  placeholder="Nguyễn Văn A"
                  class="w-full p-4 border rounded-xl focus:outline-none focus:ring-2 focus:ring-black transition">
           <p class="error-msg" id="name-error" role="alert"></p>
@@ -366,7 +357,7 @@
 
         <div>
           <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">
-            Số điện thoại <span class="text-red-500" aria-label="bắt buộc">*</span>
+            <span data-i18n="label_phone">Số điện thoại</span> <span class="text-red-500" aria-label="bắt buộc">*</span>
           </label>
           <input id="phone" type="tel" autocomplete="tel"
                  placeholder="033 456 1945"
@@ -377,17 +368,19 @@
 
         <div>
           <label for="address" class="block text-sm font-medium text-gray-700 mb-1">
-            Địa chỉ giao hàng <span class="text-red-500" aria-label="bắt buộc">*</span>
+            <span data-i18n="label_address">Địa chỉ giao hàng</span> <span class="text-red-500" aria-label="bắt buộc">*</span>
           </label>
           <input id="address" type="text" autocomplete="street-address"
+                 data-i18n-placeholder="placeholder_address"
                  placeholder="Số nhà, đường, phường/xã, quận/huyện, tỉnh/thành"
                  class="w-full p-4 border rounded-xl focus:outline-none focus:ring-2 focus:ring-black transition">
           <p class="error-msg" id="address-error" role="alert"></p>
         </div>
 
         <div>
-          <label for="note" class="block text-sm font-medium text-gray-700 mb-1">Ghi chú</label>
+          <label for="note" class="block text-sm font-medium text-gray-700 mb-1" data-i18n="label_note">Ghi chú</label>
           <textarea id="note" rows="3"
+                    data-i18n-placeholder="placeholder_note"
                     placeholder="Ví dụ: Giao giờ hành chính / Kèm hộp giấy + túi giấy làm quà..."
                     class="w-full p-4 border rounded-xl focus:outline-none focus:ring-2 focus:ring-black transition resize-none"></textarea>
         </div>
@@ -395,15 +388,16 @@
         <button id="submitBtn" type="submit"
                 class="w-full bg-black text-white py-4 rounded-xl font-bold text-base
                        hover:bg-orange-600 transition-colors duration-200
-                       disabled:opacity-50 disabled:cursor-not-allowed">
+                       disabled:opacity-50 disabled:cursor-not-allowed"
+                data-i18n="submit_btn">
           XÁC NHẬN ĐẶT HÀNG
         </button>
 
         <p class="text-sm text-gray-500 text-center pt-1">
-          👉 Hoặc nhắn Zalo
+          <span data-i18n="zalo_prefix">👉 Hoặc nhắn Zalo</span>
           <a href="https://zalo.me/0334561945" target="_blank" rel="noopener noreferrer"
              class="text-blue-600 font-semibold underline hover:text-blue-800">033 456 1945</a>
-          để xác nhận nhanh hơn
+          <span data-i18n="zalo_suffix">để xác nhận nhanh hơn</span>
         </p>
 
       </form>
@@ -415,7 +409,7 @@
 <!-- FOOTER -->
 <footer class="bg-black text-gray-400 py-8 text-center text-sm">
   <p class="font-semibold text-white mb-1">Khô Mực Tam Tiến – Dried Squid</p>
-  <p>Vùng biển Tam Tiến, Quảng Nam &nbsp;|&nbsp; Zalo: 033 456 1945</p>
+  <p><span data-i18n="footer_loc">Vùng biển Tam Tiến, Quảng Nam</span> &nbsp;|&nbsp; Zalo: 033 456 1945</p>
   <p class="mt-2 text-xs text-gray-600">© 2026 Dried Squid. All rights reserved.</p>
 </footer>
 
@@ -451,6 +445,7 @@
   const CFG = Object.freeze({
     UNIT_KG       : 0.5,
     SESSION_KEY   : 'dsq_cart_v1',
+    LANG_KEY      : 'dsq_lang_v1',
     ZALO_PHONE    : '0334561945',
     EMAILJS_KEY   : 'H_ObSOGwG001ViYfp',
     EMAILJS_SVC   : 'service_p63b3wa',
@@ -458,18 +453,238 @@
     TOAST_MS      : 3000,
     COMBO_SS_KG   : 1,   // Combo Tinh Hoa = 1kg
     COMBO_SA_KG   : 2,   // Combo Trân Quý = 2kg
+    DEFAULT_LANG  : 'vi',
   });
 
+  // ─── I18N DICTIONARY ────────────────────────────────────────────────────
+  // Toàn bộ chuỗi tĩnh hiển thị trên trang. Nội dung gửi về email cho shop
+  // (sendOrder) luôn giữ tiếng Việt bất kể khách đang xem ngôn ngữ nào,
+  // vì người nhận đơn hàng là chủ shop.
+  const T = {
+    vi: {
+      nav_products: 'Sản phẩm',
+      nav_order: 'Đặt hàng',
+      hero_kicker: 'Đặc sản biển Quảng Nam',
+      hero_title_sub: 'Món quà từ thiên nhiên',
+      hero_quote: '"Không chỉ là khô mực – mà là một món quà từ biển."',
+      hero_subtitle: 'Tinh hoa biển cả – Chuẩn mực quà biếu tặng cao cấp',
+      hero_desc: 'Khô mực câu tự nhiên được chọn lọc từ vùng biển Tam Tiến – Quảng Nam, chế biến thủ công theo phương pháp truyền thống, giữ trọn vị ngọt thanh của biển cả.',
+      hero_feat1: 'Phơi nắng tự nhiên – thịt dày, dai mềm, vị ngọt thanh đặc trưng',
+      hero_feat2: 'Không tẩm ướp – không phụ gia – không hóa chất',
+      hero_feat3: 'Đóng gói sang trọng, hút chân không – xứng đáng làm quà biếu',
+      hero_feat4: 'Cam kết chất lượng – hoàn tiền nếu không đúng mô tả',
+      hero_cta: 'Đặt hàng ngay – Giao tận nơi',
+
+      story_kicker: 'Câu chuyện từ biển',
+      story_title: 'Mỗi con mực là một lựa chọn',
+      story_body: `Dried Squid được tuyển chọn từ mực câu tự nhiên vùng biển Tam Tiến – Quảng Nam,
+        đánh bắt theo mùa, phơi nắng tự nhiên và đóng gói cẩn trọng từng gói.
+        <br><br>
+        Chúng tôi tin rằng, một món quà xứng đáng không cần phô trương –
+        chỉ cần đủ chân thành, đủ nguyên bản và đủ tinh tế.`,
+
+      combo_kicker: 'Quà biếu cao cấp',
+      combo_title: 'Gợi ý combo được chọn nhiều nhất',
+      combo_sub: 'Chọn nhanh – Đặt ngay – Giao tận nhà · Miễn phí hộp & túi quà',
+      combo_badge: '🔥 Bán chạy nhất',
+      combo_btn: 'Chọn combo này',
+
+      combo_ss_title: 'Combo Tinh Hoa',
+      combo_ss_weight: '1kg · 2 gói mực Size SS chọn lọc',
+      combo_ss_feat1: '3–4 con / gói, size đẹp đồng đều',
+      combo_ss_feat2: 'Hộp cứng + túi quà cao cấp',
+      combo_ss_feat3: 'Phù hợp biếu gia đình, người thân',
+      combo_ss_feat4: 'Giao nhanh 24h nội thành',
+      combo_ss_note: 'Tiết kiệm hơn mua lẻ',
+
+      combo_sa_title: 'Combo Trân Quý',
+      combo_sa_weight: '2kg · 4 gói mực Size SA chọn lọc',
+      combo_sa_feat1: '5–6 con / gói, size ưu tiên biếu đối tác',
+      combo_sa_feat2: 'Hộp sang trọng chỉnh chu',
+      combo_sa_feat3: 'Miễn phí giao nhanh toàn quốc',
+      combo_sa_feat4: 'Kèm thiệp cảm ơn theo yêu cầu',
+      combo_sa_note: 'Lý tưởng biếu đối tác, sếp, khách hàng',
+
+      products_title: 'Danh mục sản phẩm',
+      products_sub: 'Tuyển chọn khô mực câu – xứng đáng cho biếu tặng & thưởng thức',
+      pkg_standard_title: 'Tiêu chuẩn đóng gói',
+      pkg_weight_label: '• Trọng lượng: ',
+      pkg_per_pack: 'gói',
+      pkg_box_label: '• Kích thước hộp: ',
+      trust1: '2.000+ khách tin chọn',
+      trust2: 'Giao nhanh 24–48h',
+      trust3: 'Miễn phí túi & hộp quà từ 1kg',
+      product_add_btn: 'Thêm vào giỏ',
+      product_unit_suffix: ' / 0.5kg',
+
+      reviews_kicker: 'Khách hàng nói gì',
+      reviews_title: 'Đánh giá thật từ khách hàng',
+      reviews_cta_text: 'Bạn cũng muốn trải nghiệm? Đặt ngay hôm nay.',
+      reviews_cta_btn: 'Đặt hàng ngay',
+
+      review1_text: '"Mua về biếu ba mẹ dịp Tết, cả nhà khen ngon. Mực dày, ngọt, không bị mặn hay có mùi lạ. Đóng gói rất đẹp, nhìn sang như mua ở siêu thị cao cấp."',
+      review1_name: 'Chị Thanh',
+      review1_loc: 'TP. Hồ Chí Minh · Mua Size SS',
+      review2_text: '"Đặt lần đầu thử, ăn xong đặt liền lần 2. Mực câu tay nên thịt chắc hơn hẳn loại ngoài chợ. Giao hàng đúng hẹn, shop nhắn tin theo dõi đơn rất nhiệt tình."',
+      review2_name: 'Anh Tuấn',
+      review2_loc: 'Đà Nẵng · Mua Combo Tinh Hoa',
+      review3_text: '"Mua làm quà cho đối tác, ai cũng khen. Hộp đựng sang trọng, mực thơm ngon đặc trưng. Sẽ tiếp tục ủng hộ shop mỗi dịp lễ Tết. Giá hợp lý so với chất lượng."',
+      review3_name: 'Chị Hương',
+      review3_loc: 'Hà Nội · Mua Combo Trân Quý',
+
+      cart_title: '🛒 Giỏ hàng của bạn',
+      cart_empty: 'Giỏ hàng đang trống...',
+      cart_total_label: 'Tổng cộng',
+      cart_shipping_note: '* Phí vận chuyển sẽ được xác nhận qua Zalo',
+      cart_unit_pack: ' / gói (0.5kg)',
+      cart_unit_combo: 'kg / combo',
+      cart_qty_group_aria: 'Số lượng',
+      cart_remove_aria: 'Xóa',
+      cart_remove_btn: 'Xóa',
+
+      order_form_title: 'Thông tin đặt hàng',
+      label_name: 'Họ và tên',
+      placeholder_name: 'Nguyễn Văn A',
+      label_phone: 'Số điện thoại',
+      label_address: 'Địa chỉ giao hàng',
+      placeholder_address: 'Số nhà, đường, phường/xã, quận/huyện, tỉnh/thành',
+      label_note: 'Ghi chú',
+      placeholder_note: 'Ví dụ: Giao giờ hành chính / Kèm hộp giấy + túi giấy làm quà...',
+      submit_btn: 'XÁC NHẬN ĐẶT HÀNG',
+      submit_sending: 'Đang gửi...',
+      zalo_prefix: '👉 Hoặc nhắn Zalo',
+      zalo_suffix: 'để xác nhận nhanh hơn',
+
+      footer_loc: 'Vùng biển Tam Tiến, Quảng Nam',
+
+      err_name: 'Vui lòng nhập họ tên (ít nhất 2 ký tự)',
+      err_phone: 'Số điện thoại không hợp lệ (10 số, bắt đầu bằng 0 hoặc +84)',
+      err_address: 'Địa chỉ cần ít nhất 10 ký tự',
+
+      toast_added: (n) => `Đã thêm ${n} vào giỏ hàng`,
+      toast_empty_cart: 'Vui lòng chọn ít nhất một sản phẩm',
+      toast_success: '🎉 Đặt hàng thành công! Chúng tôi sẽ liên hệ trong 30 phút.',
+      toast_fail: (phone) => `Gửi đơn thất bại. Vui lòng nhắn Zalo: ${phone}`,
+    },
+
+    en: {
+      nav_products: 'Products',
+      nav_order: 'Order',
+      hero_kicker: 'Seafood specialty from Quang Nam',
+      hero_title_sub: 'The Gift Of Nature',
+      hero_quote: '"Not just dried squid — a gift from the sea."',
+      hero_subtitle: 'The essence of the ocean – a premium gifting standard',
+      hero_desc: 'Naturally line-caught squid, hand-picked from the waters of Tam Tien, Quang Nam, and prepared using traditional methods to preserve the sea\'s natural sweetness.',
+      hero_feat1: 'Sun-dried naturally – thick, tender meat with a signature sweet flavor',
+      hero_feat2: 'No marinade, no additives, no chemicals',
+      hero_feat3: 'Vacuum-sealed, premium packaging – gift-worthy presentation',
+      hero_feat4: 'Quality guaranteed – refund if not as described',
+      hero_cta: 'Order now – Home delivery',
+
+      story_kicker: 'A story from the sea',
+      story_title: 'Every squid is a deliberate choice',
+      story_body: `Dried Squid is carefully selected from naturally line-caught squid off the coast of
+        Tam Tien, Quang Nam — caught by season, sun-dried, and packed with care in every bag.
+        <br><br>
+        We believe a worthy gift doesn't need to be flashy —
+        it just needs to be honest, authentic, and refined.`,
+
+      combo_kicker: 'Premium gift sets',
+      combo_title: 'Our most popular gift combos',
+      combo_sub: 'Quick pick – Order now – Delivered to your door · Free box & gift bag',
+      combo_badge: '🔥 Best seller',
+      combo_btn: 'Choose this combo',
+
+      combo_ss_title: 'Essence Combo',
+      combo_ss_weight: '1kg · 2 packs of hand-selected Size SS squid',
+      combo_ss_feat1: '3–4 pieces / pack, evenly sized',
+      combo_ss_feat2: 'Rigid box + premium gift bag',
+      combo_ss_feat3: 'Great for gifting family & loved ones',
+      combo_ss_feat4: '24h fast delivery in the city',
+      combo_ss_note: 'More savings than buying separately',
+
+      combo_sa_title: 'Treasure Combo',
+      combo_sa_weight: '2kg · 4 packs of hand-selected Size SA squid',
+      combo_sa_feat1: '5–6 pieces / pack, priority size for business gifts',
+      combo_sa_feat2: 'Elegant, refined gift box',
+      combo_sa_feat3: 'Free nationwide express delivery',
+      combo_sa_feat4: 'Thank-you card included on request',
+      combo_sa_note: 'Ideal for partners, bosses, and clients',
+
+      products_title: 'Product catalog',
+      products_sub: 'Hand-picked line-caught squid – worthy of gifting & everyday enjoyment',
+      pkg_standard_title: 'Packaging standard',
+      pkg_weight_label: '• Weight: ',
+      pkg_per_pack: 'pack',
+      pkg_box_label: '• Box size: ',
+      trust1: '2,000+ trusted customers',
+      trust2: '24–48h fast delivery',
+      trust3: 'Free bag & gift box from 1kg',
+      product_add_btn: 'Add to cart',
+      product_unit_suffix: ' / 0.5kg',
+
+      reviews_kicker: 'What customers say',
+      reviews_title: 'Real reviews from real customers',
+      reviews_cta_text: 'Want to try it yourself? Order today.',
+      reviews_cta_btn: 'Order now',
+
+      review1_text: '"Bought it as a Tet gift for my parents — the whole family loved it. Thick, sweet meat, no odd smell or excess saltiness. Beautifully packaged, looks like a premium supermarket product."',
+      review1_name: 'Ms. Thanh',
+      review1_loc: 'Ho Chi Minh City · Bought Size SS',
+      review2_text: '"Tried it once, ordered again right after. Hand-caught squid so the meat is noticeably firmer than market versions. Delivered on time, and the shop kept me updated the whole way."',
+      review2_name: 'Mr. Tuan',
+      review2_loc: 'Da Nang · Bought Essence Combo',
+      review3_text: '"Bought it as a gift for business partners, everyone loved it. Elegant box, distinctly delicious squid. Will keep supporting this shop every holiday. Great value for the quality."',
+      review3_name: 'Ms. Huong',
+      review3_loc: 'Hanoi · Bought Treasure Combo',
+
+      cart_title: '🛒 Your cart',
+      cart_empty: 'Your cart is empty...',
+      cart_total_label: 'Total',
+      cart_shipping_note: '* Shipping fee will be confirmed via Zalo',
+      cart_unit_pack: ' / pack (0.5kg)',
+      cart_unit_combo: 'kg / combo',
+      cart_qty_group_aria: 'Quantity',
+      cart_remove_aria: 'Remove',
+      cart_remove_btn: 'Remove',
+
+      order_form_title: 'Order details',
+      label_name: 'Full name',
+      placeholder_name: 'John Smith',
+      label_phone: 'Phone number',
+      label_address: 'Delivery address',
+      placeholder_address: 'House number, street, ward, district, city',
+      label_note: 'Note',
+      placeholder_note: 'e.g. Deliver during business hours / include gift box + gift bag...',
+      submit_btn: 'CONFIRM ORDER',
+      submit_sending: 'Sending...',
+      zalo_prefix: '👉 Or message us on Zalo',
+      zalo_suffix: 'for faster confirmation',
+
+      footer_loc: 'Tam Tien coastal area, Quang Nam',
+
+      err_name: 'Please enter your name (at least 2 characters)',
+      err_phone: 'Invalid phone number (10 digits, starting with 0 or +84)',
+      err_address: 'Address must be at least 10 characters',
+
+      toast_added: (n) => `Added ${n} to cart`,
+      toast_empty_cart: 'Please select at least one product',
+      toast_success: '🎉 Order placed successfully! We\'ll contact you within 30 minutes.',
+      toast_fail: (phone) => `Failed to send order. Please message us on Zalo: ${phone}`,
+    },
+  };
+
   // ─── DATA ─────────────────────────────────────────────────────────────────
+  // name/note đều có bản vi + en để render theo ngôn ngữ hiện tại
   const PRODUCTS = [
-    { id:'ss',    name:'Size SS',     price:862500, image:'images/ss.jpg',    note:'3–4 con / 0.5kg'  },
-    { id:'sa',    name:'Size SA',     price:850000, image:'images/sa.jpg',    note:'5–6 con / 0.5kg'  },
-    { id:'a1',    name:'Size A1',     price:800000, image:'images/a1.jpg',    note:'7–8 con / 0.5kg'  },
-    { id:'a2',    name:'Size A2',     price:762500, image:'images/a2.jpg',    note:'15–20 con / 0.5kg'},
-    { id:'a3',    name:'Size A3',     price:650000, image:'images/a31.jpg',   note:'20–25 con / 0.5kg'},
-    { id:'a4',    name:'Size A4',     price:481250, image:'images/a4.jpg',    note:'25–30 con / 0.5kg'},
-    { id:'a5',    name:'Size A5',     price:362000, image:'images/a5.jpg',    note:'30–40 con / 0.5kg'},
-    { id:'1nang', name:'Mực 1 nắng', price:520000, image:'images/1nang.jpg', note:'2–4 con / 0.5kg'  },
+    { id:'ss',    name:{vi:'Size SS',        en:'Size SS'},        price:862500, image:'images/ss.jpg',    note:{vi:'3–4 con / 0.5kg',   en:'3–4 pcs / 0.5kg'}  },
+    { id:'sa',    name:{vi:'Size SA',        en:'Size SA'},        price:850000, image:'images/sa.jpg',    note:{vi:'5–6 con / 0.5kg',   en:'5–6 pcs / 0.5kg'}  },
+    { id:'a1',    name:{vi:'Size A1',        en:'Size A1'},        price:800000, image:'images/a1.jpg',    note:{vi:'7–8 con / 0.5kg',   en:'7–8 pcs / 0.5kg'}  },
+    { id:'a2',    name:{vi:'Size A2',        en:'Size A2'},        price:762500, image:'images/a2.jpg',    note:{vi:'15–20 con / 0.5kg', en:'15–20 pcs / 0.5kg'}},
+    { id:'a3',    name:{vi:'Size A3',        en:'Size A3'},        price:650000, image:'images/a31.jpg',   note:{vi:'20–25 con / 0.5kg', en:'20–25 pcs / 0.5kg'}},
+    { id:'a4',    name:{vi:'Size A4',        en:'Size A4'},        price:481250, image:'images/a4.jpg',    note:{vi:'25–30 con / 0.5kg', en:'25–30 pcs / 0.5kg'}},
+    { id:'a5',    name:{vi:'Size A5',        en:'Size A5'},        price:362000, image:'images/a5.jpg',    note:{vi:'30–40 con / 0.5kg', en:'30–40 pcs / 0.5kg'}},
+    { id:'1nang', name:{vi:'Mực 1 nắng',     en:'Sun-dried squid (1 sun)'}, price:520000, image:'images/1nang.jpg', note:{vi:'2–4 con / 0.5kg', en:'2–4 pcs / 0.5kg'}  },
   ];
 
   // Map lookup O(1)
@@ -480,20 +695,44 @@
 
   const COMBO_MAP = new Map([
     ['combo-ss', {
-      name    : 'Combo Tinh Hoa (1kg)',
+      nameKey : 'combo_ss_title',
       kg      : CFG.COMBO_SS_KG,
       packs   : 2,   // 2 gói SS × 0.5kg = 1kg
       price   : Math.round(PRODUCT_MAP.get('ss').price * 2 * (1 - COMBO_DISCOUNT)),
-      desc    : 'Hộp + túi quà, phù hợp biếu gia đình',
     }],
     ['combo-sa', {
-      name    : 'Combo Trân Quý (2kg)',
+      nameKey : 'combo_sa_title',
       kg      : CFG.COMBO_SA_KG,
       packs   : 4,   // 4 gói SA × 0.5kg = 2kg
       price   : Math.round(PRODUCT_MAP.get('sa').price * 4 * (1 - COMBO_DISCOUNT)),
-      desc    : 'Hộp sang trọng, miễn phí giao nhanh',
     }],
   ]);
+
+  // Review data (dùng chung cho renderReviews)
+  const REVIEWS = [
+    { avatar: 'Th', avatarBg: 'bg-amber-100',  avatarText: 'text-amber-700',  textKey: 'review1_text', nameKey: 'review1_name', locKey: 'review1_loc' },
+    { avatar: 'An', avatarBg: 'bg-orange-100', avatarText: 'text-orange-700', textKey: 'review2_text', nameKey: 'review2_name', locKey: 'review2_loc' },
+    { avatar: 'Hu', avatarBg: 'bg-blue-100',   avatarText: 'text-blue-700',   textKey: 'review3_text', nameKey: 'review3_name', locKey: 'review3_loc' },
+  ];
+
+  // ─── LANGUAGE STATE ─────────────────────────────────────────────────────
+  const Lang = {
+    current: CFG.DEFAULT_LANG,
+
+    load() {
+      let saved = null;
+      try { saved = localStorage.getItem(CFG.LANG_KEY); } catch { /* blocked */ }
+      this.current = (saved === 'en' || saved === 'vi') ? saved : CFG.DEFAULT_LANG;
+    },
+
+    save() {
+      try { localStorage.setItem(CFG.LANG_KEY, this.current); } catch { /* silent */ }
+    },
+
+    t(key) {
+      return (T[this.current] && T[this.current][key]) ?? (T.vi[key] ?? key);
+    },
+  };
 
   // ─── UTILITIES ────────────────────────────────────────────────────────────
   const Utils = {
@@ -503,7 +742,7 @@
       d.appendChild(document.createTextNode(String(str ?? '')));
       return d.innerHTML;
     },
-    /** Format tiền VNĐ */
+    /** Format tiền VNĐ (giữ nguyên định dạng VNĐ ở cả hai ngôn ngữ) */
     fmtPrice(n) {
       return Number(n).toLocaleString('vi-VN') + ' ₫';
     },
@@ -518,15 +757,11 @@
   // ─── VALIDATOR ────────────────────────────────────────────────────────────
   const Validator = {
     rules: {
-      name   : v => v.trim().length >= 2          || 'Vui lòng nhập họ tên (ít nhất 2 ký tự)',
-      phone  : v => /^(0|\+84)\d{9}$/.test(v.trim()) || 'Số điện thoại không hợp lệ (10 số, bắt đầu bằng 0 hoặc +84)',
-      address: v => v.trim().length >= 10         || 'Địa chỉ cần ít nhất 10 ký tự',
+      name   : v => v.trim().length >= 2            || Lang.t('err_name'),
+      phone  : v => /^(0|\+84)\d{9}$/.test(v.trim()) || Lang.t('err_phone'),
+      address: v => v.trim().length >= 10            || Lang.t('err_address'),
     },
 
-    /**
-     * Validate một field, hiển thị/ẩn error message
-     * @returns {boolean} true nếu hợp lệ
-     */
     validateField(id) {
       const input  = Utils.el(id);
       const errEl  = document.getElementById(id + '-error');
@@ -541,7 +776,6 @@
       return valid;
     },
 
-    /** Validate toàn bộ form, trả về true nếu tất cả hợp lệ */
     validateAll() {
       return ['name', 'phone', 'address'].map(id => this.validateField(id)).every(Boolean);
     },
@@ -549,9 +783,8 @@
 
   // ─── CART STORE ───────────────────────────────────────────────────────────
   const Cart = {
-    _items: [],   // [{ id, name, price, qty, isCombo, kg }]
+    _items: [],   // [{ id, qty, isCombo, kg }]  — tên/giá lấy động theo ngôn ngữ khi render
 
-    /** Load từ sessionStorage khi khởi động */
     _load() {
       try {
         this._items = JSON.parse(sessionStorage.getItem(CFG.SESSION_KEY)) || [];
@@ -560,19 +793,36 @@
       }
     },
 
-    /** Lưu vào sessionStorage */
     _save() {
       try {
         sessionStorage.setItem(CFG.SESSION_KEY, JSON.stringify(this._items));
       } catch { /* silent – storage full or blocked */ }
     },
 
-    /** Tìm item theo id – O(n), n < 15 nên ổn */
     _find(id) {
       return this._items.find(i => i.id === id) || null;
     },
 
-    /** Thêm sản phẩm đơn lẻ */
+    /** Lấy tên hiển thị hiện tại (theo ngôn ngữ) cho 1 item trong giỏ */
+    displayName(item) {
+      if (item.isCombo) {
+        const combo = COMBO_MAP.get(item.id);
+        return combo ? Lang.t(combo.nameKey) : item.id;
+      }
+      const p = PRODUCT_MAP.get(item.id);
+      return p ? p.name[Lang.current] : item.id;
+    },
+
+    /** Tên tiếng Việt cố định — dùng khi gửi đơn hàng cho shop */
+    viNameFor(item) {
+      if (item.isCombo) {
+        const combo = COMBO_MAP.get(item.id);
+        return combo ? T.vi[combo.nameKey] : item.id;
+      }
+      const p = PRODUCT_MAP.get(item.id);
+      return p ? p.name.vi : item.id;
+    },
+
     addProduct(productId) {
       const p = PRODUCT_MAP.get(productId);
       if (!p) return;
@@ -580,79 +830,62 @@
       if (existing) {
         existing.qty += 1;
       } else {
-        this._items.push({ id: productId, name: p.name, price: p.price, qty: 1, isCombo: false, kg: CFG.UNIT_KG });
+        this._items.push({ id: productId, price: p.price, qty: 1, isCombo: false, kg: CFG.UNIT_KG });
       }
-      this._save();
-      UI.renderCart();
-      UI.showToast(`Đã thêm ${p.name} vào giỏ hàng`, 'success');
-      UI.updateBadge();
+      this._afterMutate(Lang.t('toast_added')(p.name[Lang.current]));
     },
 
-    /** Thêm combo */
-    addCombo(comboId, comboName, comboKg) {
+    addCombo(comboId) {
       const combo = COMBO_MAP.get(comboId);
       if (!combo) return;
       const existing = this._find(comboId);
       if (existing) {
         existing.qty += 1;
       } else {
-        this._items.push({
-          id     : comboId,
-          name   : combo.name,
-          price  : combo.price,
-          qty    : 1,
-          isCombo: true,
-          kg     : combo.kg,
-        });
+        this._items.push({ id: comboId, price: combo.price, qty: 1, isCombo: true, kg: combo.kg });
       }
-      this._save();
-      UI.renderCart();
-      UI.showToast(`Đã thêm ${combo.name} vào giỏ hàng`, 'success');
-      UI.updateBadge();
+      this._afterMutate(Lang.t('toast_added')(Lang.t(combo.nameKey)));
     },
 
-    /** Thay đổi số lượng */
     changeQty(id, delta) {
       const item = this._find(id);
       if (!item) return;
-      item.qty += delta;
+      item.qty = Math.min(50, item.qty + delta);
       if (item.qty <= 0) {
         this._items = this._items.filter(i => i.id !== id);
       }
-      this._save();
-      UI.renderCart();
-      UI.updateBadge();
+      this._afterMutate();
     },
 
-    /** Xóa item */
     remove(id) {
       this._items = this._items.filter(i => i.id !== id);
-      this._save();
-      UI.renderCart();
-      UI.updateBadge();
+      this._afterMutate();
     },
 
-    /** Xóa toàn bộ */
     clear() {
       this._items = [];
       sessionStorage.removeItem(CFG.SESSION_KEY);
-      UI.renderCart();
-      UI.updateBadge();
+      this._afterMutate();
     },
 
-    /** Tổng tiền */
     getTotal() {
       return this._items.reduce((sum, i) => sum + i.price * i.qty, 0);
     },
 
-    /** Số lượng item (tổng qty) */
     getTotalQty() {
       return this._items.reduce((sum, i) => sum + i.qty, 0);
     },
 
-    /** Snapshot để gửi đi (immutable copy) */
     snapshot() {
       return this._items.map(i => ({ ...i }));
+    },
+
+    /** Gộp save + re-render + toast + badge — tránh lặp code ở mọi hàm mutate */
+    _afterMutate(toastMsg) {
+      this._save();
+      UI.renderCart();
+      if (toastMsg) UI.showToast(toastMsg, 'success');
+      UI.updateBadge();
     },
   };
 
@@ -666,7 +899,6 @@
   const UI = {
     _toastTimer: null,
 
-    /** Hiển thị toast notification */
     showToast(msg, type = '') {
       const t = Utils.el('toast');
       t.textContent = msg;
@@ -675,47 +907,77 @@
       this._toastTimer = setTimeout(() => { t.className = ''; }, CFG.TOAST_MS);
     },
 
-    /** Cập nhật badge số lượng (mobile) */
     updateBadge() {
       const badge = document.getElementById('cartBadge');
       if (!badge) return;
       const qty = Cart.getTotalQty();
       badge.textContent = qty;
       badge.classList.toggle('hidden', qty === 0);
-      // Pop animation
       badge.classList.add('pop');
       setTimeout(() => badge.classList.remove('pop'), 200);
     },
 
-    /** Render danh sách sản phẩm */
     renderProducts() {
       const list = document.getElementById('productList');
       if (!list) return;
-      list.innerHTML = PRODUCTS.map(p => `
+      list.innerHTML = PRODUCTS.map(p => {
+        const name = p.name[Lang.current];
+        const note = p.note[Lang.current];
+        return `
         <article class="product-card bg-white rounded-2xl shadow hover:shadow-lg transition-shadow" role="listitem">
           <div class="overflow-hidden rounded-t-2xl h-60">
             <img src="${Utils.esc(p.image)}"
-                 alt="${Utils.esc(p.name)} – ${Utils.esc(p.note)}"
+                 alt="${Utils.esc(name)} – ${Utils.esc(note)}"
                  class="w-full h-full object-cover"
                  width="300" height="240"
                  loading="lazy">
           </div>
           <div class="p-5">
-            <b class="block text-base mb-1">${Utils.esc(p.name)}</b>
-            <p class="text-sm text-gray-500 mb-1">${Utils.esc(p.note)}</p>
-            <p class="text-orange-600 font-bold mb-4">${Utils.fmtPrice(p.price)}<span class="text-xs text-gray-400 font-normal"> / 0.5kg</span></p>
+            <b class="block text-base mb-1">${Utils.esc(name)}</b>
+            <p class="text-sm text-gray-500 mb-1">${Utils.esc(note)}</p>
+            <p class="text-orange-600 font-bold mb-4">${Utils.fmtPrice(p.price)}<span class="text-xs text-gray-400 font-normal">${Utils.esc(Lang.t('product_unit_suffix'))}</span></p>
             <button onclick="Cart.addProduct('${Utils.esc(p.id)}')"
-                    aria-label="Thêm ${Utils.esc(p.name)} vào giỏ hàng"
+                    aria-label="${Utils.esc(Lang.t('product_add_btn'))}: ${Utils.esc(name)}"
                     class="w-full bg-black text-white py-2 rounded-xl font-bold
                            hover:bg-orange-600 transition-colors duration-200">
-              Thêm vào giỏ
+              ${Utils.esc(Lang.t('product_add_btn'))}
             </button>
           </div>
         </article>
+      `;
+      }).join('');
+    },
+
+    renderReviews() {
+      const grid = document.getElementById('reviewGrid');
+      if (!grid) return;
+      grid.innerHTML = REVIEWS.map(r => `
+        <div class="review-card bg-white rounded-2xl p-6 border" role="listitem">
+          <div class="stars mb-3">★★★★★</div>
+          <p class="text-sm text-gray-700 leading-relaxed mb-4">${Utils.esc(Lang.t(r.textKey))}</p>
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full ${r.avatarBg} flex items-center justify-center font-bold ${r.avatarText} text-sm">${r.avatar}</div>
+            <div>
+              <p class="text-xs font-semibold">${Utils.esc(Lang.t(r.nameKey))}</p>
+              <p class="text-xs text-gray-400">${Utils.esc(Lang.t(r.locKey))}</p>
+            </div>
+          </div>
+        </div>
       `).join('');
     },
 
-    /** Render giỏ hàng */
+    renderCombos() {
+      const comboSS = COMBO_MAP.get('combo-ss');
+      const comboSA = COMBO_MAP.get('combo-sa');
+      const ssEl = document.getElementById('comboSSPrice');
+      const saEl = document.getElementById('comboSAPrice');
+      if (ssEl && comboSS) ssEl.textContent = Utils.fmtPrice(comboSS.price);
+      if (saEl && comboSA) saEl.textContent = Utils.fmtPrice(comboSA.price);
+
+      const badgeEl = document.getElementById('comboSSCard');
+      if (badgeEl) badgeEl.setAttribute('data-badge', Lang.t('combo_badge'));
+    },
+
     renderCart() {
       const box      = document.getElementById('cartContent');
       const totalBox = document.getElementById('totalDisplay');
@@ -724,16 +986,18 @@
       const items = Cart.snapshot();
 
       if (items.length === 0) {
-        box.innerHTML = '<p class="text-gray-400 italic text-center py-10">Giỏ hàng đang trống...</p>';
+        box.innerHTML = `<p class="text-gray-400 italic text-center py-10">${Utils.esc(Lang.t('cart_empty'))}</p>`;
         totalBox.textContent = Utils.fmtPrice(0);
         return;
       }
 
       box.innerHTML = items.map(i => {
         const totalKg   = (i.kg * i.qty).toFixed(1);
-        const unitLabel = i.isCombo ? `${i.kg}kg / combo` : `${Utils.fmtPrice(i.price)} / gói (0.5kg)`;
+        const sname     = Utils.esc(Cart.displayName(i));
         const sid       = Utils.esc(i.id);
-        const sname     = Utils.esc(i.name);
+        const unitLabel = i.isCombo
+          ? `${i.kg}${Utils.esc(Lang.t('cart_unit_combo'))}`
+          : `${Utils.fmtPrice(i.price)}${Utils.esc(Lang.t('cart_unit_pack'))}`;
 
         return `
           <div class="flex justify-between items-center bg-white p-4 rounded-xl border" role="listitem">
@@ -746,20 +1010,20 @@
             </div>
             <div class="flex items-center gap-2 flex-shrink-0">
               <div class="flex items-center border rounded-lg overflow-hidden"
-                   role="group" aria-label="Số lượng ${sname}">
+                   role="group" aria-label="${Utils.esc(Lang.t('cart_qty_group_aria'))} ${sname}">
                 <button onclick="changeQty('${sid}', -1)"
-                        aria-label="Giảm số lượng ${sname}"
+                        aria-label="− ${sname}"
                         class="qty-btn px-3 py-1.5 font-bold text-lg leading-none">−</button>
                 <span class="px-3 font-bold text-sm min-w-[1.5rem] text-center"
                       aria-live="polite">${i.qty}</span>
                 <button onclick="changeQty('${sid}', 1)"
-                        aria-label="Tăng số lượng ${sname}"
+                        aria-label="+ ${sname}"
                         class="qty-btn px-3 py-1.5 font-bold text-lg leading-none">+</button>
               </div>
               <button onclick="removeItem('${sid}')"
-                      aria-label="Xóa ${sname} khỏi giỏ hàng"
+                      aria-label="${Utils.esc(Lang.t('cart_remove_aria'))} ${sname}"
                       class="text-red-400 hover:text-red-600 text-xs font-bold transition-colors">
-                Xóa
+                ${Utils.esc(Lang.t('cart_remove_btn'))}
               </button>
             </div>
           </div>
@@ -768,6 +1032,51 @@
 
       totalBox.textContent = Utils.fmtPrice(Cart.getTotal());
     },
+
+    /** Áp dụng bản dịch cho toàn bộ text tĩnh trong DOM + cập nhật nút toggle */
+    applyStaticI18n() {
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        el.textContent = Lang.t(key);
+      });
+      document.querySelectorAll('[data-i18n-html]').forEach(el => {
+        const key = el.getAttribute('data-i18n-html');
+        el.innerHTML = Lang.t(key);
+      });
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        el.setAttribute('placeholder', Lang.t(key));
+      });
+
+      document.documentElement.lang = Lang.current;
+      document.getElementById('langViBtn').classList.toggle('active', Lang.current === 'vi');
+      document.getElementById('langEnBtn').classList.toggle('active', Lang.current === 'en');
+    },
+
+    /** Re-render toàn bộ nội dung động phụ thuộc ngôn ngữ */
+    refreshAll() {
+      this.applyStaticI18n();
+      this.renderProducts();
+      this.renderReviews();
+      this.renderCombos();
+      this.renderCart();
+      // Xóa lỗi validate cũ vì thông báo lỗi đã đổi ngôn ngữ
+      ['name', 'phone', 'address'].forEach(id => {
+        const input = document.getElementById(id);
+        if (input && input.classList.contains('field-error')) {
+          Validator.validateField(id);
+        }
+      });
+    },
+  };
+
+  // ─── LANGUAGE SWITCH HANDLER ────────────────────────────────────────────
+  window.setLang = function (lang) {
+    if (lang !== 'vi' && lang !== 'en') return;
+    if (lang === Lang.current) return;
+    Lang.current = lang;
+    Lang.save();
+    UI.refreshAll();
   };
 
   // ─── CART ACTION HANDLERS (gọi từ onclick trong HTML) ──────────────────
@@ -778,38 +1087,33 @@
   async function sendOrder(e) {
     e.preventDefault();
 
-    // 1. Validate giỏ hàng
     if (Cart.getTotalQty() === 0) {
-      UI.showToast('Vui lòng chọn ít nhất một sản phẩm', 'error');
+      UI.showToast(Lang.t('toast_empty_cart'), 'error');
       document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
       return;
     }
 
-    // 2. Validate form
     if (!Validator.validateAll()) {
       const firstErr = document.querySelector('.field-error');
       if (firstErr) firstErr.scrollIntoView({ behavior: 'smooth', block: 'center' });
       return;
     }
 
-    // 3. Lấy dữ liệu form
     const name    = Utils.el('name').value.trim();
     const phone   = Utils.el('phone').value.trim();
     const address = Utils.el('address').value.trim();
     const note    = Utils.el('note').value.trim() || 'Không có';
 
-    // 4. Disable button, hiện loading
     const btn = Utils.el('submitBtn');
     btn.disabled = true;
-    btn.innerHTML = '<span class="spinner" aria-hidden="true"></span>Đang gửi...';
+    btn.innerHTML = `<span class="spinner" aria-hidden="true"></span>${Utils.esc(Lang.t('submit_sending'))}`;
 
-    // 5. Build nội dung đơn hàng
+    // Nội dung gửi cho shop luôn bằng tiếng Việt, bất kể khách xem ngôn ngữ nào
     const productsText = Cart.snapshot().map(i => {
       const kg = (i.kg * i.qty).toFixed(1);
-      return `- ${i.name} x${i.qty} (${kg}kg): ${Utils.fmtPrice(i.price * i.qty)}`;
+      return `- ${Cart.viNameFor(i)} x${i.qty} (${kg}kg): ${Utils.fmtPrice(i.price * i.qty)}`;
     }).join('\n');
 
-    // 6. Gửi qua EmailJS
     try {
       await emailjs.send(CFG.EMAILJS_SVC, CFG.EMAILJS_TPL, {
         name,
@@ -820,18 +1124,17 @@
         total    : Utils.fmtPrice(Cart.getTotal()),
       });
 
-      // ✅ Thành công
       Cart.clear();
       Utils.el('orderForm').reset();
-      UI.showToast('🎉 Đặt hàng thành công! Chúng tôi sẽ liên hệ trong 30 phút.', 'success');
+      UI.showToast(Lang.t('toast_success'), 'success');
       window.scrollTo({ top: 0, behavior: 'smooth' });
 
     } catch (err) {
       console.error('EmailJS error:', err);
-      UI.showToast(`Gửi đơn thất bại. Vui lòng nhắn Zalo: ${CFG.ZALO_PHONE}`, 'error');
+      UI.showToast(Lang.t('toast_fail')(CFG.ZALO_PHONE), 'error');
     } finally {
       btn.disabled = false;
-      btn.textContent = 'XÁC NHẬN ĐẶT HÀNG';
+      btn.textContent = Lang.t('submit_btn');
     }
   }
 
@@ -841,7 +1144,6 @@
     if (input) {
       input.addEventListener('blur', () => Validator.validateField(id));
       input.addEventListener('input', () => {
-        // Xóa lỗi ngay khi người dùng bắt đầu gõ lại
         if (input.classList.contains('field-error')) Validator.validateField(id);
       });
     }
@@ -855,20 +1157,10 @@
 
   // ─── INIT ─────────────────────────────────────────────────────────────────
   emailjs.init(CFG.EMAILJS_KEY);
+  Lang.load();
   Cart._load();
-  UI.renderProducts();
-  UI.renderCart();
-  UI.updateBadge();
+  UI.refreshAll();
 
-  // Hiển thị giá combo động
-  const comboSS = COMBO_MAP.get('combo-ss');
-  const comboSA = COMBO_MAP.get('combo-sa');
-  const ssEl = document.getElementById('comboSSPrice');
-  const saEl = document.getElementById('comboSAPrice');
-  if (ssEl && comboSS) ssEl.textContent = Utils.fmtPrice(comboSS.price);
-  if (saEl && comboSA) saEl.textContent = Utils.fmtPrice(comboSA.price);
-
-  // Bind form submit
   const form = document.getElementById('orderForm');
   if (form) form.addEventListener('submit', sendOrder);
 
