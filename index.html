@@ -475,19 +475,23 @@
   // Map lookup O(1)
   const PRODUCT_MAP = new Map(PRODUCTS.map(p => [p.id, p]));
 
-  // Combo definitions
+  // Combo definitions — giá = (đơn giá gói lẻ × số gói) × (1 - % giảm)
+  const COMBO_DISCOUNT = 0.02; // 2% giảm khi mua theo combo
+
   const COMBO_MAP = new Map([
     ['combo-ss', {
-      name   : 'Combo Tinh Hoa (1kg)',
-      kg     : CFG.COMBO_SS_KG,
-      price  : PRODUCT_MAP.get('ss').price * 1.96,   // 2 gói SS = 1kg
-      desc   : 'Hộp + túi quà, phù hợp biếu gia đình',
+      name    : 'Combo Tinh Hoa (1kg)',
+      kg      : CFG.COMBO_SS_KG,
+      packs   : 2,   // 2 gói SS × 0.5kg = 1kg
+      price   : Math.round(PRODUCT_MAP.get('ss').price * 2 * (1 - COMBO_DISCOUNT)),
+      desc    : 'Hộp + túi quà, phù hợp biếu gia đình',
     }],
     ['combo-sa', {
-      name   : 'Combo Trân Quý (2kg)',
-      kg     : CFG.COMBO_SA_KG,
-      price  : PRODUCT_MAP.get('sa').price * 3.96,   // 4 gói SA = 2kg
-      desc   : 'Hộp sang trọng, miễn phí giao nhanh',
+      name    : 'Combo Trân Quý (2kg)',
+      kg      : CFG.COMBO_SA_KG,
+      packs   : 4,   // 4 gói SA × 0.5kg = 2kg
+      price   : Math.round(PRODUCT_MAP.get('sa').price * 4 * (1 - COMBO_DISCOUNT)),
+      desc    : 'Hộp sang trọng, miễn phí giao nhanh',
     }],
   ]);
 
