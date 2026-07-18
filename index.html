@@ -11,6 +11,42 @@
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+<!-- ═══════════════════════════════════════════════
+     GOOGLE ANALYTICS 4
+     ⚠️ THAY "G-XXXXXXXXXX" bằng Measurement ID thật của bạn
+     (Lấy tại: Google Analytics → Admin → Data Streams → chọn stream web)
+════════════════════════════════════════════════ -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3WTRD6K6B5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3WTRD6K6B5');
+</script>
+
+<!-- ═══════════════════════════════════════════════
+     FACEBOOK PIXEL
+     ⚠️ THAY "YOUR_PIXEL_ID" bằng Pixel ID thật của bạn
+     (Lấy tại: Meta Events Manager → Nguồn dữ liệu → Pixel của bạn)
+════════════════════════════════════════════════ -->
+<script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '620748751699252');
+  fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=620748751699252&ev=PageView&noscript=1"
+/></noscript>
+
 <style>
   html { scroll-behavior: smooth; }
 
@@ -92,6 +128,35 @@
     background: #111;
     color: #fff;
   }
+
+  /* ── PAYMENT QR MODAL ── */
+  #qrModalOverlay {
+    position: fixed; inset: 0; background: rgba(17,17,17,.6);
+    z-index: 10000; display: none;
+    align-items: center; justify-content: center;
+    padding: 16px;
+  }
+  #qrModalOverlay.show { display: flex; }
+  #qrModalBox {
+    background: #fff; border-radius: 20px; max-width: 420px; width: 100%;
+    max-height: 90vh; overflow-y: auto;
+    padding: 28px 24px; text-align: center;
+    animation: qrPop .25s ease;
+  }
+  @keyframes qrPop {
+    from { transform: scale(.92); opacity: 0; }
+    to   { transform: scale(1); opacity: 1; }
+  }
+  #qrModalImg {
+    width: 100%; max-width: 260px; margin: 14px auto;
+    border: 1px solid #e5e7eb; border-radius: 12px; display: block;
+  }
+  .qr-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 10px 14px; background: #f7f2eb; border-radius: 10px;
+    font-size: 14px; margin-bottom: 8px;
+  }
+  .qr-row b { color: var(--coral); }
 </style>
 </head>
 
@@ -434,6 +499,38 @@
 </div>
 
 <!-- ═══════════════════════════════════════════════
+     PAYMENT QR MODAL
+════════════════════════════════════════════════ -->
+<div id="qrModalOverlay" role="dialog" aria-modal="true" aria-labelledby="qrModalTitle">
+  <div id="qrModalBox">
+    <p class="text-3xl mb-1">🎉</p>
+    <h3 id="qrModalTitle" class="text-lg font-bold mb-1" data-i18n="qr_modal_title">Đặt hàng thành công!</h3>
+    <p class="text-sm text-gray-500 mb-4" data-i18n="qr_modal_sub">Quét mã bên dưới để thanh toán nhanh</p>
+
+    <img id="qrModalImg" src="" alt="VietQR thanh toán">
+
+    <div class="qr-row">
+      <span data-i18n="qr_modal_amount_label">Số tiền</span>
+      <b id="qrModalAmount">0 ₫</b>
+    </div>
+    <div class="qr-row">
+      <span data-i18n="qr_modal_code_label">Nội dung CK</span>
+      <b id="qrModalCode">—</b>
+    </div>
+
+    <p class="text-xs text-gray-400 mt-3 mb-5" data-i18n="qr_modal_note">
+      Vui lòng chuyển đúng số tiền và nội dung để shop xác nhận đơn nhanh hơn. Không bắt buộc thanh toán trước — shop sẽ liên hệ xác nhận trong 30 phút.
+    </p>
+
+    <button onclick="closeQrModal()"
+            class="w-full bg-black text-white py-3 rounded-xl font-bold hover:bg-orange-600 transition-colors duration-200"
+            data-i18n="qr_modal_close_btn">
+      Đã hiểu, đóng lại
+    </button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
      JAVASCRIPT — MODULE PATTERN
 ════════════════════════════════════════════════ -->
 <script>
@@ -454,6 +551,11 @@
     COMBO_SS_KG   : 1,   // Combo Tinh Hoa = 1kg
     COMBO_SA_KG   : 2,   // Combo Trân Quý = 2kg
     DEFAULT_LANG  : 'vi',
+
+    // ── Thông tin nhận thanh toán VietQR (đọc từ QR ngân hàng đã cung cấp) ──
+    BANK_ID       : '970436',            // Mã BIN Vietcombank
+    BANK_ACCOUNT  : 'DRIEDSQUID',        // Số tài khoản / alias VCB
+    BANK_NAME     : 'LE VIET DRIEDSQUID',
   });
 
   // ─── I18N DICTIONARY ────────────────────────────────────────────────────
@@ -565,6 +667,13 @@
       toast_empty_cart: 'Vui lòng chọn ít nhất một sản phẩm',
       toast_success: '🎉 Đặt hàng thành công! Chúng tôi sẽ liên hệ trong 30 phút.',
       toast_fail: (phone) => `Gửi đơn thất bại. Vui lòng nhắn Zalo: ${phone}`,
+
+      qr_modal_title: 'Đặt hàng thành công!',
+      qr_modal_sub: 'Quét mã bên dưới để thanh toán nhanh',
+      qr_modal_amount_label: 'Số tiền',
+      qr_modal_code_label: 'Nội dung CK',
+      qr_modal_note: 'Vui lòng chuyển đúng số tiền và nội dung để shop xác nhận đơn nhanh hơn. Không bắt buộc thanh toán trước — shop sẽ liên hệ xác nhận trong 30 phút.',
+      qr_modal_close_btn: 'Đã hiểu, đóng lại',
     },
 
     en: {
@@ -671,6 +780,13 @@
       toast_empty_cart: 'Please select at least one product',
       toast_success: '🎉 Order placed successfully! We\'ll contact you within 30 minutes.',
       toast_fail: (phone) => `Failed to send order. Please message us on Zalo: ${phone}`,
+
+      qr_modal_title: 'Order placed successfully!',
+      qr_modal_sub: 'Scan the code below to pay quickly',
+      qr_modal_amount_label: 'Amount',
+      qr_modal_code_label: 'Transfer note',
+      qr_modal_note: 'Please transfer the exact amount with the note above so we can confirm your order faster. Payment isn\'t required upfront — we\'ll contact you to confirm within 30 minutes.',
+      qr_modal_close_btn: 'Got it, close',
     },
   };
 
@@ -752,6 +868,63 @@
       if (!e) throw new Error(`Element #${id} not found`);
       return e;
     },
+
+    /** Bỏ dấu tiếng Việt — nội dung chuyển khoản VietQR không nhận ký tự có dấu */
+    stripDiacritics(str) {
+      return String(str ?? '')
+        .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+        .replace(/đ/g, 'd').replace(/Đ/g, 'D');
+    },
+
+    /** Sinh mã đơn hàng ngắn, duy nhất theo thời gian: DSQ-XXXXXX */
+    genOrderCode() {
+      return 'DSQ' + Date.now().toString(36).slice(-6).toUpperCase();
+    },
+
+    /**
+     * Build URL ảnh VietQR động theo đơn hàng, dùng dịch vụ Quick Link miễn phí
+     * của VietQR.io — không cần đăng ký, không cần API key.
+     * Tài liệu: https://www.vietqr.io/en/danh-sach-api/link-tao-ma-nhanh/
+     */
+    buildVietQrUrl(amount, orderCode) {
+      const info = this.stripDiacritics(orderCode).replace(/[^a-zA-Z0-9 ]/g, '').slice(0, 50);
+      const name = encodeURIComponent(this.stripDiacritics(CFG.BANK_NAME));
+      return `https://img.vietqr.io/image/${CFG.BANK_ID}-${CFG.BANK_ACCOUNT}-compact2.png`
+           + `?amount=${Math.round(amount)}&addInfo=${encodeURIComponent(info)}&accountName=${name}`;
+    },
+  };
+
+  // ─── ANALYTICS (Google Analytics 4 + Facebook Pixel) ───────────────────
+  // Gọi an toàn: nếu gtag/fbq chưa load (bị chặn quảng cáo, mất mạng...)
+  // thì bỏ qua thay vì làm vỡ luồng đặt hàng của khách.
+  const Analytics = {
+    trackAddToCart(itemName, price, currency = 'VND') {
+      try {
+        if (typeof gtag === 'function') {
+          gtag('event', 'add_to_cart', {
+            currency, value: price,
+            items: [{ item_name: itemName, price }],
+          });
+        }
+        if (typeof fbq === 'function') {
+          fbq('track', 'AddToCart', { content_name: itemName, value: price, currency });
+        }
+      } catch { /* analytics không được chặn luồng chính */ }
+    },
+
+    trackPurchase(orderCode, total, itemCount, currency = 'VND') {
+      try {
+        if (typeof gtag === 'function') {
+          gtag('event', 'purchase', {
+            transaction_id: orderCode, value: total, currency,
+            num_items: itemCount,
+          });
+        }
+        if (typeof fbq === 'function') {
+          fbq('track', 'Purchase', { value: total, currency, content_type: 'product' });
+        }
+      } catch { /* analytics không được chặn luồng chính */ }
+    },
   };
 
   // ─── VALIDATOR ────────────────────────────────────────────────────────────
@@ -832,6 +1005,7 @@
       } else {
         this._items.push({ id: productId, price: p.price, qty: 1, isCombo: false, kg: CFG.UNIT_KG });
       }
+      Analytics.trackAddToCart(p.name.vi, p.price);
       this._afterMutate(Lang.t('toast_added')(p.name[Lang.current]));
     },
 
@@ -844,6 +1018,7 @@
       } else {
         this._items.push({ id: comboId, price: combo.price, qty: 1, isCombo: true, kg: combo.kg });
       }
+      Analytics.trackAddToCart(T.vi[combo.nameKey], combo.price);
       this._afterMutate(Lang.t('toast_added')(Lang.t(combo.nameKey)));
     },
 
@@ -1053,6 +1228,20 @@
       document.getElementById('langEnBtn').classList.toggle('active', Lang.current === 'en');
     },
 
+    /** Hiển thị modal QR thanh toán sau khi đặt hàng thành công */
+    showQrModal(amount, orderCode) {
+      const url = Utils.buildVietQrUrl(amount, orderCode);
+      Utils.el('qrModalImg').src = url;
+      Utils.el('qrModalAmount').textContent = Utils.fmtPrice(amount);
+      Utils.el('qrModalCode').textContent = orderCode;
+      Utils.el('qrModalOverlay').classList.add('show');
+    },
+
+    hideQrModal() {
+      const overlay = document.getElementById('qrModalOverlay');
+      if (overlay) overlay.classList.remove('show');
+    },
+
     /** Re-render toàn bộ nội dung động phụ thuộc ngôn ngữ */
     refreshAll() {
       this.applyStaticI18n();
@@ -1080,8 +1269,9 @@
   };
 
   // ─── CART ACTION HANDLERS (gọi từ onclick trong HTML) ──────────────────
-  window.changeQty   = (id, delta) => Cart.changeQty(id, delta);
-  window.removeItem  = (id)        => Cart.remove(id);
+  window.changeQty    = (id, delta) => Cart.changeQty(id, delta);
+  window.removeItem   = (id)        => Cart.remove(id);
+  window.closeQrModal = ()          => UI.hideQrModal();
 
   // ─── ORDER SUBMIT ─────────────────────────────────────────────────────────
   async function sendOrder(e) {
@@ -1108,6 +1298,10 @@
     btn.disabled = true;
     btn.innerHTML = `<span class="spinner" aria-hidden="true"></span>${Utils.esc(Lang.t('submit_sending'))}`;
 
+    const orderCode = Utils.genOrderCode();
+    const total      = Cart.getTotal();
+    const totalQty   = Cart.getTotalQty();
+
     // Nội dung gửi cho shop luôn bằng tiếng Việt, bất kể khách xem ngôn ngữ nào
     const productsText = Cart.snapshot().map(i => {
       const kg = (i.kg * i.qty).toFixed(1);
@@ -1120,13 +1314,17 @@
         phone,
         address,
         note,
-        products : productsText,
-        total    : Utils.fmtPrice(Cart.getTotal()),
+        products  : productsText,
+        total     : Utils.fmtPrice(total),
+        orderCode : orderCode,   // dùng để đối chiếu với nội dung chuyển khoản VietQR
       });
+
+      Analytics.trackPurchase(orderCode, total, totalQty);
 
       Cart.clear();
       Utils.el('orderForm').reset();
       UI.showToast(Lang.t('toast_success'), 'success');
+      UI.showQrModal(total, orderCode);
       window.scrollTo({ top: 0, behavior: 'smooth' });
 
     } catch (err) {
